@@ -1,5 +1,7 @@
 package DBcontroller;
 
+import Entities.Entry;
+
 import java.sql.*;
 
 public class DBSQL {
@@ -18,10 +20,10 @@ public class DBSQL {
             throw throwables;
         }
     }
-    /*public void entryDK(Entry entry) { //todo copypaste til amerikansk, find ud af afgrænsning
+    public void entryDK(Entry entry) { //todo copypaste til amerikansk, find ud af afgrænsning
         System.out.println("1");
         try {
-            String sql = "INSERT INTO Entry (fName, lName, firm, idType, time) " +
+            String sql = "INSERT INTO entry (fName, lName, firm, idType, time) " +
                     "VALUES ('" + entry.getfName() + "','" + entry.getlName()+ "','" + entry.getFirm() + "','" + entry.getIdType() + "','" + entry.getNow()
                     + "')";
             //guestID, fName, lName, firm, idType, time, IDpicture?
@@ -34,7 +36,7 @@ public class DBSQL {
             throwables.printStackTrace();
         }
         closeConnection();
-    }*/
+    }
 
     private void closeConnection() {
         try {
