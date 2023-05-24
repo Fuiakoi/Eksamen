@@ -1,5 +1,7 @@
 package DBcontroller;
 
+import Entities.Entry;
+
 import java.sql.*;
 
 public class DBSQL {
@@ -10,7 +12,7 @@ public class DBSQL {
     public DBSQL() throws SQLException {
         connection = null;
         try {
-            String url = "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/RegisterIntec/RegisterSQLite.db";
+            String url = "jdbc:sqlite:C://Users/aikke/IdeaProjects/Eksamen/RegisterSQLite.db";
             connection = DriverManager.getConnection(url);
             connection.isReadOnly();
         } catch (SQLException throwables) {
@@ -18,11 +20,12 @@ public class DBSQL {
             throw throwables;
         }
     }
-    /*public void entryDK(Entry entry) { //todo copypaste til amerikansk, find ud af afgrænsning
+    public void entryDK(Entry entry) { //todo copypaste til amerikansk, find ud af afgrænsning
         System.out.println("1");
         try {
             String sql = "INSERT INTO Entry (fName, lName, firm, idType, time) " +
-                    "VALUES ('" + entry.getfName() + "','" + entry.getlName()+ "','" + entry.getFirm() + "','" + entry.getIdType() + "','" + entry.getNow()
+                    "VALUES ('" + entry.getfName() + "','" + entry.getlName()+ "','" + entry.getFirm() + "','"
+                    + entry.getIdType() + "','" + entry.getNow()
                     + "')";
             //guestID, fName, lName, firm, idType, time, IDpicture?
             Statement stmt = connection.createStatement();
@@ -34,7 +37,7 @@ public class DBSQL {
             throwables.printStackTrace();
         }
         closeConnection();
-    }*/
+    }
 
     private void closeConnection() {
         try {
@@ -54,7 +57,9 @@ public class DBSQL {
             stmt.execute(sql);
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
-                System.out.println(rs.getString("fName") + " " + rs.getString("lName") + " " + rs.getString("firm") + " " + rs.getString("idType") + " " + rs.getString("time"));
+                System.out.println(rs.getString("fName") + " " + rs.getString("lName") + " " +
+                        "" + rs.getString("firm") + " " + rs.getString("idType") + "" +
+                        " " + rs.getString("time"));
             }
             stmt.close();
         } catch (SQLException throwables) {
@@ -74,7 +79,7 @@ public class DBSQL {
     }
     public static String getPassword(String email) {
         try {
-            String sql = "SELECT password FROM User WHERE email = '" + email + "'";
+            String sql = "SELECT password FROM Admin WHERE email = '" + email + "'";
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
             ResultSet rs = stmt.getResultSet();
