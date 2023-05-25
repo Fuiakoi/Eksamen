@@ -66,7 +66,6 @@ public class DBSQL {
             throwables.printStackTrace();
         }
     }
-
     public static void deleteBasedOnAge() {
         try {
             String sql = "DELETE FROM Entry WHERE datetime(time) < datetime('now', '-3 years')";
