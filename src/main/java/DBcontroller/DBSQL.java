@@ -69,7 +69,7 @@ public class DBSQL {
 
     public static void deleteBasedOnAge() {
         try {
-            String sql = "SELECT * FROM Entry WHERE datetime(time) < datetime('now', '-3 years')";
+            String sql = "DELETE FROM Entry WHERE datetime(time) < datetime('now', '-3 years')";
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
             stmt.close();
