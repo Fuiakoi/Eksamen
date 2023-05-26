@@ -12,7 +12,7 @@ public class DBSQL {
     public DBSQL() throws SQLException {
         connection = null;
         try {
-            String url = "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/RegisterIntec/RegisterSQLite.db";
+            String url = "jdbc:sqlite:C://Users/aikke/IdeaProjects/Eksamen/RegisterSQLite.db";
             connection = DriverManager.getConnection(url);
             connection.isReadOnly();
         } catch (SQLException throwables) {
@@ -20,11 +20,12 @@ public class DBSQL {
             throw throwables;
         }
     }
+
     public void entryDK(Entry entry) { //todo copypaste til amerikansk, find ud af afgrænsning
         System.out.println("1");
         try {
             String sql = "INSERT INTO entry (fName, lName, firm, idType, time) " +
-                    "VALUES ('" + entry.getfName() + "','" + entry.getlName()+ "','" + entry.getFirm() + "','" + entry.getIdType() + "','" + entry.getNow()
+                    "VALUES ('" + entry.getfName() + "','" + entry.getlName() + "','" + entry.getFirm() + "','" + entry.getIdType() + "','" + entry.getNow()
                     + "')";
             //guestID, fName, lName, firm, idType, time, IDpicture?
             Statement stmt = connection.createStatement();
@@ -74,15 +75,34 @@ public class DBSQL {
             throwables.printStackTrace();
         }
     }
+
     public static String getPassword(String email) {
         try {
-            String sql = "SELECT password FROM User WHERE email = '" + email + "'";
+            String sql = "SELECT password FROM Admin WHERE email = '" + email + "'";
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
             ResultSet rs = stmt.getResultSet();
             String password = rs.getString("password");
             stmt.close();
             return password;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getEmail(String email) {
+        String hov;
+        try {
+            String sql = "SELECT email FROM Admin WHERE email = '" + email + "'";
+            Statement stmt = connection.createStatement();
+
+            stmt.execute(sql);
+            ResultSet rs = stmt.getResultSet();
+            hov = rs.getString(1);System.out.println(hov);
+            stmt.close();
+            return hov;
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
