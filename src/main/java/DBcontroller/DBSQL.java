@@ -1,7 +1,6 @@
 package DBcontroller;
 
 import Entities.Entry;
-
 import java.sql.*;
 
 public class DBSQL {
