@@ -1,7 +1,6 @@
 package DBcontroller;
 
 import Entities.Entry;
-
 import java.sql.*;
 
 public class DBSQL {
@@ -76,7 +75,7 @@ public class DBSQL {
     }
     public static String getPassword(String email) {
         try {
-            String sql = "SELECT password FROM User WHERE email = '" + email + "'";
+            String sql = "SELECT password FROM Admin WHERE email = '" + email + "'";
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
             ResultSet rs = stmt.getResultSet();

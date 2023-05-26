@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,29 +60,32 @@
                     </select>
                 </div>
             </div>
-            <p><button class= "w3-button w3-indigo">Registrer</button></p>
+            <button class= "w3-button w3-indigo">Registrer</button>
         </div>
 
         <div id="Log ind" class="w3-container w3-white w3-padding-16 myLink">
             <h3>Velkommen, Admin</h3>
+
+                    <form method="post" action="/admin" autocomplete="off">
+                        <div class="w3-row-padding" style="margin:0 -16px;">
+                        <div class="w3-half">
+                        <label for="email">Email</label>
+                        <input class="w3-input w3-border" type="text" id="email" name="email" placeholder="Email">
+                        </div>
+                        <div class="w3-half">
+                        <label for="adgangskode">Adgangskode</label>
+                        <input class="w3-input w3-border" type="password" id="adgangskode"name="password" placeholder="Password">
+                        </div>
+                        <button class="w3-button w3-indigo" type="submit" formaction="admin">Log ind</button>
+                        </div>
+                    </form>
+            </div>
+            <!--
             <div class="w3-row-padding" style="margin:0 -16px;">
                 <div class="w3-half">
-            <form method="post" action="/index" autocomplete="off">
-                <label for="brugernavn">Brugernavn</label>
-                <input class="w3-input w3-border" type="text" id="brugernavn" name="brugernavn" placeholder="Brugernavn">
-                <label for="adgangskode">Adgangskode</label>
-                <input class="w3-input w3-border" type="password" id="adgangskode"name="password" placeholder="Password">
-                <button class="w3-button w3-indigo" type="submit">Log ind</button>
-            </form>
-                </div>
-            </div>
-
-            <!--
-            // <div class="w3-row-padding" style="margin:0 -16px;">
-                // <div class="w3-half">
                     <label>Brugernavn</label>
                     <input class="w3-input w3-border" type="text" placeholder="Indtast brugernavn">
-                // </div>
+                </div>
                 <div class="w3-half">
                     <label>Kodeord</label>
                     <input class="w3-input w3-border" type="text" placeholder="Indtast kodeord">
@@ -91,7 +93,6 @@
             </div>
             <p><button class="w3-button w3-indigo">Log ind</button></p>
             -->
-        </div>
 
         <div id="Sprog/Language" class="w3-container w3-white w3-padding-16 myLink">
             <h3>Vælg dit sprog/Choose your language</h3>
