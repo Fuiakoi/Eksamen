@@ -1,9 +1,7 @@
 package UseCases;
 
 import DBcontroller.DBSQL;
-import Entities.Entry;
-import java.sql.SQLException;
-import DBcontroller.DBSQL;
+import Entities.Admin;
 import Entities.Entry;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -12,6 +10,7 @@ import java.util.HashMap;
 public class UseCase {
 
     static DBSQL db;
+
 
     /*static {
         try {
@@ -25,13 +24,7 @@ public class UseCase {
         db.entryDK(new Entry(fName, lName, firm, idType, now));
     }
 
-    public static void buildListByPeriod() {
-        HashMap<Integer, String> accessByPeriod = new HashMap<>();
-        db.listAccessByPeriod();
-        for (int i = 0; i < accessByPeriod.size(); i++) {
-            System.out.println(accessByPeriod.get(i));
-        }
-    }
+
     public static String loginCheck(String email, String password) throws SQLException {
         db = new DBSQL();
         String res = db.getPassword(email);
@@ -43,4 +36,38 @@ public class UseCase {
             return "Wrong password";
         }
     }
+
+    public static void buildListByPeriod() {
+        HashMap<Integer, String> accessByPeriod = new HashMap<>();
+        db.listAccessByPeriod();
+        for (int i = 0; i < accessByPeriod.size(); i++) {
+            System.out.println(accessByPeriod.get(i));
+        }
+    }
+    //only supposed to be able when another admin is logged in. method checks if email is already in DB, then adds if false
+/*    public static void addAdmin(String email, String password) {
+boolean isOccopied;
+
+        String hov = db.getEmail(email);
+        if (hov == email) {
+            Admin admin = new Admin();
+            admin.setEmail(email);
+            admin.setPassword(password);
+            System.out.println("yay");
+        }
+        else{
+            System.out.println("nay");
+        }
+
+
+
+    }
+    //only supposed to be able, when another admin is logged in.
+    public static void deleteAdmin(){
+
+    }
+    //this method is to use the dbsql deleteBasedOnAge, but do it after some time has passed
+    public static void deleteOnTime(){
+
+    }*/
 }
