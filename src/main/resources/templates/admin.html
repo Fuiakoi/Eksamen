@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="da-DK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Admin - Intec</title>
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+    .myLink {display: none}
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background-color: white;
+      color: black;
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="w3-white">
+
+<!-- Navigation Bar -->
+<div class="w3-bar w3-white w3-border-bottom w3-xlarge w3-padding-16">
+  <img src="Logo.jpg" style="max-width:15%;">
+</div>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
+  <img class="w3-image" src="Serverroom.jpg" alt="serverroom" style="width:100%;heigth:100%;">
+  <div class="w3-display-middle" style="width:65%">
+    <div class="w3-bar w3-dark-grey">
+      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Menu');"></i>Menu</button>
+      <button class="w3-bar-item w3-button tablink w3-right" onclick="openLink(event, 'Log ud');"></i>Log ud</button>
+    </div>
+
+    <!-- Tabs -->
+    <div id="Menu" class="w3-container w3-white w3-padding-16 myLink">
+      <h3>Velkommen til Intec's varehus</h3>
+      <div class="w3-row-padding w3-half" style="margin:0 -16px;">
+          <p><button class="w3-button w3-border w3-white">Opret ny admin</button>
+            <button class="w3-button w3-border w3-white">Slet gammel admin</button>
+            <button class="w3-button w3-border w3-white">Se liste</button></p>
+      </div>
+    </div>
+
+    <div id="Log ud" class="w3-container w3-white w3-padding-16 myLink">
+      <h3>Velkommen, Admin</h3>
+
+      <form method="post" action="/index" autocomplete="off">
+        <div class="w3-row-padding" style="margin:0 -16px;">
+          <div class="w3-half">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            <!--<input class="w3-input w3-border" type="text" id="email" name="email" placeholder="Email">-->
+          </div>
+          <div class="w3-half">
+            <label for="adgangskode">Adgangskode</label>
+            <input class="w3-input w3-border" type="password" id="adgangskode"name="password" placeholder="Password">
+          </div>
+          <button class="w3-button w3-indigo" type="submit" formaction="index">Log ud</button>
+        </div>
+      </form>
+    </div>
+    <!--
+    <div class="w3-row-padding" style="margin:0 -16px;">
+        <div class="w3-half">
+            <label>Brugernavn</label>
+            <input class="w3-input w3-border" type="text" placeholder="Indtast brugernavn">
+        </div>
+        <div class="w3-half">
+            <label>Kodeord</label>
+            <input class="w3-input w3-border" type="text" placeholder="Indtast kodeord">
+        </div>
+    </div>
+    <p><button class="w3-button w3-indigo">Log ind</button></p>
+    -->
+  </div>
+</header>
+
+<!-- Contact -->
+<div class="footer">
+  <h2>Kontakt</h2>
+  <p>Kontakt os, hvis du har nogle spørgsmål</p>
+  <i class="fa fa-map-marker" style="width:30px"></i> Danmarksgade 6B, 4690 Haslev, DK<br>
+  <i class="fa fa-phone" style="width:30px"></i> Telefon: +45 5672 0707<br>
+</div>
+<!-- End page content -->
+</div>
+
+<script>
+  // Tabs
+  function openLink(evt, linkName) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("myLink");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-indigo", "");
+    }
+    document.getElementById(linkName).style.display = "block";
+    evt.currentTarget.className += " w3-indigo";
+  }
+
+  // Click on the first tablink on load
+  document.getElementsByClassName("tablink")[0].click();
+
+
+  var subjectObject = {
+    "DHL": {
+    },
+    "DSV": {
+    },
+    "FedEx": {
+    },
+    "GLS": {
+    },
+    "Postnord": {
+    },
+    "UPS": {
+    }
+  }
+  window.onload = function() {
+    var subjectSel = document.getElementById("subject");
+    for (var x in subjectObject) {
+      subjectSel.options[subjectSel.options.length] = new Option(x, x);
+    }
+  }
+</script>
+</body>
+</html>
