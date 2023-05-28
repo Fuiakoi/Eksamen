@@ -1,5 +1,6 @@
 package DBcontroller;
 
+import Entities.Admin;
 import Entities.Entry;
 import java.sql.*;
 
@@ -11,7 +12,7 @@ public class DBSQL {
     public DBSQL() throws SQLException {
         connection = null;
         try {
-            String url = "jdbc:sqlite:C://Users/aikke/IdeaProjects/Eksamen/RegisterSQLite.db";
+            String url = "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/RegisterSQLite.db";
             connection = DriverManager.getConnection(url);
             connection.isReadOnly();
         } catch (SQLException throwables) {
@@ -75,7 +76,23 @@ public class DBSQL {
         }
     }
 
-    public static String getPassword(String email) {
+
+    public static Admin getEmail(String email) throws SQLException{
+        Admin admin = null;
+        String sql = "SELECT email, password FROM Admin WHERE email = '" + email + "'";
+        Statement stmt = connection.createStatement();
+
+        try (ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) {
+                admin = new Admin();
+                admin.setEmail(rs.getString("email"));
+                admin.setPassword(rs.getString("password"));
+            }
+        }
+        return admin;
+    }
+
+    /*public static String getPassword(String email) {
         try {
             String sql = "SELECT password FROM Admin WHERE email = '" + email + "'";
             Statement stmt = connection.createStatement();
@@ -88,9 +105,9 @@ public class DBSQL {
             throwables.printStackTrace();
         }
         return null;
-    }
+    }*/
 
-    public String getEmail(String email) {
+    /*public String getEmail(String email) {
         String hov;
         try {
             String sql = "SELECT email FROM Admin WHERE email = '" + email + "'";
@@ -106,5 +123,5 @@ public class DBSQL {
             throwables.printStackTrace();
         }
         return null;
-    }
+    }*/
 }
