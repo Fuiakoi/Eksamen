@@ -23,17 +23,22 @@ public class UIcontroller {
     @PostMapping("/index")
     public String login(@RequestParam String email, @RequestParam String password, Model model) throws SQLException {
         System.out.println("Login attempt with email: " + email);
-        Admin admin = DBSQL.getEmail(email);
+       /* UseCase useCase = new UseCase();
+        useCase.loginCheck();*/
+        Admin admin = DBSQL.getAdmin(email);
         if (admin != null) {
             System.out.println("Found admin with email: " + admin.getEmail());
             if (admin.getPassword().equals(password)) {
                 System.out.println("Password matched. Redirecting to admin.");
-                return "redirect:/admin";
+                return "admin";
             }
         }
-        System.out.println("Login failed. Invalid email or password.");
-        model.addAttribute("error", "Invalid email or password.");
-        return "index";
+        else {
+            System.out.println("Login failed. Invalid email or password.");
+            model.addAttribute("error", "Invalid email or password.");
+            return "index";
+        }
+        return null;
     }
 
 

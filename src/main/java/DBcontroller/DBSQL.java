@@ -9,16 +9,27 @@ public class DBSQL {
     private Statement stmt;
     private Statement stmt1;
 
-    public DBSQL() throws SQLException {
+
+ /*   public DBSQL() throws SQLException {
         connection = null;
         try {
-            String url = "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/RegisterSQLite.db";
+            String url = "jdbc:sqlite:C://Users/aikke/IdeaProjects/Eksamen/RegisterSQLite.db";
             connection = DriverManager.getConnection(url);
-            connection.isReadOnly();
+           // connection.isReadOnly();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             throw throwables;
+        }*/
+    //}
+    public static Connection connectToDatabase(){
+        String url = "jdbc:sqlite:C://Users/aikke/IdeaProjects/Eksamen/RegisterSQLite.db";;
+
+        try {
+            connection = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return connection;
     }
 
     public void entryDK(Entry entry) { //todo copypaste til amerikansk, find ud af afgrænsning
@@ -39,7 +50,7 @@ public class DBSQL {
         closeConnection();
     }
 
-    private void closeConnection() {
+    public static void closeConnection() {
         try {
             if (connection != null) {
                 connection.close();
@@ -51,6 +62,7 @@ public class DBSQL {
 //access til print funktioner //todo efter html implementering
 
     public void listAccessByPeriod() {
+        connectToDatabase();
         try {
             String sql = "SELECT * FROM Entry";
             Statement stmt = connection.createStatement();
@@ -60,6 +72,7 @@ public class DBSQL {
                 System.out.println(rs.getString("fName") + " " + rs.getString("lName") + " " + rs.getString("firm") + " " + rs.getString("idType") + " " + rs.getString("time"));
             }
             stmt.close();
+            closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -77,7 +90,8 @@ public class DBSQL {
     }
 
 
-    public static Admin getEmail(String email) throws SQLException{
+    public static Admin getAdmin(String email) throws SQLException{
+        connectToDatabase();
         Admin admin = null;
         String sql = "SELECT email, password FROM Admin WHERE email = '" + email + "'";
         Statement stmt = connection.createStatement();
@@ -89,10 +103,12 @@ public class DBSQL {
                 admin.setPassword(rs.getString("password"));
             }
         }
+        closeConnection();
         return admin;
     }
 
-    /*public static String getPassword(String email) {
+    public  String getPassword(String email) {
+        connectToDatabase();
         try {
             String sql = "SELECT password FROM Admin WHERE email = '" + email + "'";
             Statement stmt = connection.createStatement();
@@ -100,14 +116,16 @@ public class DBSQL {
             ResultSet rs = stmt.getResultSet();
             String password = rs.getString("password");
             stmt.close();
+            closeConnection();
             return password;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        closeConnection();
         return null;
-    }*/
+    }
 
-    /*public String getEmail(String email) {
+    public String getEmail(String email) {
         String hov;
         try {
             String sql = "SELECT email FROM Admin WHERE email = '" + email + "'";
@@ -115,7 +133,8 @@ public class DBSQL {
 
             stmt.execute(sql);
             ResultSet rs = stmt.getResultSet();
-            hov = rs.getString(1);System.out.println(hov);
+            hov = rs.getString(1);
+            System.out.println(hov);
             stmt.close();
             return hov;
 
@@ -123,5 +142,5 @@ public class DBSQL {
             throwables.printStackTrace();
         }
         return null;
-    }*/
+    }
 }
