@@ -50,11 +50,12 @@ public class UseCase {
         }
     }
     //only supposed to be able when another admin is logged in. method checks if email is already in DB, then adds if false
-/*    public static void addAdmin(String email, String password) {
-boolean isOccopied;
+// method checks if email is identical
+    public static void addAdmin(String email, String password) {
+        boolean isOccopied;
 
-        String hov = db.getEmail(email);
-        if (hov == email) {
+        String identicalEmail = db.getEmail(email);
+        if (identicalEmail != email) {
             Admin admin = new Admin();
             admin.setEmail(email);
             admin.setPassword(password);
@@ -71,5 +72,5 @@ boolean isOccopied;
     //this method is to use the dbsql deleteBasedOnAge, but do it after some time has passed
     public static void deleteOnTime(){
 
-    }*/
+    }
 }
