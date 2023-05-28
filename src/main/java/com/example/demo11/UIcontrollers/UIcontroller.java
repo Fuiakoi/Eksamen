@@ -28,7 +28,7 @@ public class UIcontroller {
             System.out.println("Found admin with email: " + admin.getEmail());
             if (admin.getPassword().equals(password)) {
                 System.out.println("Password matched. Redirecting to admin.");
-                return "redirect:/admin";
+                return "admin";
             }
         }
         System.out.println("Login failed. Invalid email or password.");

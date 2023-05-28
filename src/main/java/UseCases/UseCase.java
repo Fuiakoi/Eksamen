@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class UseCase {
 
     static DBSQL db;
-    private static Connection connection;
+  //  private static Connection connection;
     //private static Statement stmt;
 
     /*static {
@@ -26,31 +26,12 @@ public class UseCase {
         }
     }*/
 
+
     public void buildEntry(String fName, String lName, String firm, String idType, LocalDateTime now) {
         db.entryDK(new Entry(fName, lName, firm, idType, now));
     }
 
-    public static Admin getEmail(String email) throws SQLException{
-        System.out.println("Fetching admin with email: " + email);
-        Admin admin = null;
-        String sql = "SELECT email, password FROM Admin WHERE email = '" + email + "'";
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            if (rs.next()) {
-                admin = new Admin();
-                admin.setEmail(rs.getString("email"));
-                admin.setPassword(rs.getString("password"));
-                System.out.println("Found admin with email: " + rs.getString("email"));
-            }
-        }
-
-        return admin;
-    }
-
-
-
-    /*public static String loginCheck(String email, String password) throws SQLException {
-        db = new DBSQL();
+    public String loginCheck(String email, String password) throws SQLException {
         String res = db.getPassword(email);
         if (res.equals(null))
             return "Wrong email";
@@ -59,7 +40,7 @@ public class UseCase {
         } else {
             return "Wrong password";
         }
-    }*/
+    }
 
     public static void buildListByPeriod() {
         HashMap<Integer, String> accessByPeriod = new HashMap<>();

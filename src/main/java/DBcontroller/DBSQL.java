@@ -12,13 +12,23 @@ public class DBSQL {
     public DBSQL() throws SQLException {
         connection = null;
         try {
-            String url = "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/RegisterSQLite.db";
+            String url = "jdbc:sqlite:C://Users/aikke/IdeaProjects/Eksamen/RegisterSQLite.db";
             connection = DriverManager.getConnection(url);
-            connection.isReadOnly();
+           // connection.isReadOnly();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             throw throwables;
+        }*/
+    //}
+    public static Connection connectToDatabase(){
+        String url = "jdbc:sqlite:C://Users/aikke/IdeaProjects/Eksamen/RegisterSQLite.db";;
+
+        try {
+            connection = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return connection;
     }
 
     public void entryDK(Entry entry) { //todo copypaste til amerikansk, find ud af afgrænsning
@@ -92,7 +102,8 @@ public class DBSQL {
         return admin;
     }
 
-    /*public static String getPassword(String email) {
+    public  String getPassword(String email) {
+        connectToDatabase();
         try {
             String sql = "SELECT password FROM Admin WHERE email = '" + email + "'";
             Statement stmt = connection.createStatement();
@@ -105,7 +116,7 @@ public class DBSQL {
             throwables.printStackTrace();
         }
         return null;
-    }*/
+    }
 
     /*public String getEmail(String email) {
         String hov;
