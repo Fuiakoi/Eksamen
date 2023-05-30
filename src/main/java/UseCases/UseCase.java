@@ -26,7 +26,6 @@ public class UseCase {
         }
     }*/
 
-
     public void buildEntry(String fName, String lName, String firm, String idType, LocalDateTime now) {
         db.entryDK(new Entry(fName, lName, firm, idType, now));
     }

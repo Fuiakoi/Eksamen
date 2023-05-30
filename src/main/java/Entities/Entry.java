@@ -10,7 +10,6 @@ public class Entry {
     String firm;
     LocalDateTime now;
 
-
     public Entry(String fName, String lName, String idType, String firm, LocalDateTime now) {
         this.fName = fName;
         this.lName = lName;

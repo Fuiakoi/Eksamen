@@ -22,7 +22,7 @@ public class DBSQL {
         }*/
     //}
     public static Connection connectToDatabase(){
-        String url = "jdbc:sqlite:C://Users/aikke/IdeaProjects/Eksamen/RegisterSQLite.db";;
+        String url = "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/RegisterSQLite.db";;
 
         try {
             connection = DriverManager.getConnection(url);
