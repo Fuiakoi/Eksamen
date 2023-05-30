@@ -41,7 +41,6 @@ public class UIcontroller {
         return null;
     }
 
-
     @PostMapping("/admin")
     public String admin() {
         return "admin";
