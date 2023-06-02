@@ -2,52 +2,41 @@ package DBcontroller;
 
 import Entities.Admin;
 import Entities.Entry;
+import org.springframework.cglib.core.Local;
+
 import java.sql.*;
+import java.time.LocalDateTime;
 
 public class DBSQL {
     private static Connection connection;
     private Statement stmt;
     private Statement stmt1;
 
-
- /*   public DBSQL() throws SQLException {
-        connection = null;
-        try {
-            String url = "jdbc:sqlite:C://Users/aikke/IdeaProjects/Eksamen/RegisterSQLite.db";
-            connection = DriverManager.getConnection(url);
-           // connection.isReadOnly();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            throw throwables;
-        }*/
-    //}
-    public static Connection connectToDatabase(){
-        String url = "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/RegisterSQLite.db";;
+    public DBSQL(){
+        String url = "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/RegisterSQLite.db";
 
         try {
             connection = DriverManager.getConnection(url);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return connection;
     }
 
-    public void entryDK(Entry entry) { //todo copypaste til amerikansk, find ud af afgrænsning
-        System.out.println("1");
+    public static void entryDKinsert(Entry entry) { //todo copypaste til amerikansk, find ud af afgrænsning
         try {
             String sql = "INSERT INTO entry (fName, lName, firm, idType, time) " +
-                    "VALUES ('" + entry.getfName() + "','" + entry.getlName() + "','" + entry.getFirm() + "','" + entry.getIdType() + "','" + entry.getNow()
+                    "VALUES ('" + entry.getfName() + "','" + entry.getlName() + "','" + entry.getFirm() + "','" + entry.getIdType() + "','" + entry.getDateTime()
                     + "')";
+            // String sql = "INSERT INTO entry (fName, lName, firm, idType) VALUES ('Sofia', 'Mostgaard', 'IBM', 'Pas')";
             //guestID, fName, lName, firm, idType, time, IDpicture?
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
-            System.out.println("2");
             System.out.println("Connection to SQLite has been established. \n");
             stmt.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        closeConnection();
+        // closeConnection();
     }
 
     public static void closeConnection() {
@@ -62,7 +51,6 @@ public class DBSQL {
 //access til print funktioner //todo efter html implementering
 
     public void listAccessByPeriod() {
-        connectToDatabase();
         try {
             String sql = "SELECT * FROM Entry";
             Statement stmt = connection.createStatement();
@@ -91,7 +79,6 @@ public class DBSQL {
 
 
     public static Admin getAdmin(String email) throws SQLException{
-        connectToDatabase();
         Admin admin = null;
         String sql = "SELECT email, password FROM Admin WHERE email = '" + email + "'";
         Statement stmt = connection.createStatement();
@@ -108,21 +95,23 @@ public class DBSQL {
     }
 
     public  String getPassword(String email) {
-        connectToDatabase();
         try {
             String sql = "SELECT password FROM Admin WHERE email = '" + email + "'";
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
             ResultSet rs = stmt.getResultSet();
-            String password = rs.getString("password");
-            stmt.close();
-            closeConnection();
-            return password;
+            if (rs.next()) {
+                String password = rs.getString("password");
+                stmt.close();
+                closeConnection();
+                return password;
+            }
+            return "";
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         closeConnection();
-        return null;
+        return "";
     }
 
     public String getEmail(String email) {

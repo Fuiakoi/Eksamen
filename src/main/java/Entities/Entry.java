@@ -8,26 +8,26 @@ public class Entry {
     String lName;
     String idType;
     String firm;
-    LocalDateTime now;
+    LocalDateTime time;
 
-    public Entry(String fName, String lName, String idType, String firm, LocalDateTime now) {
+    public Entry(String fName, String lName, String firm, String idType) {
         this.fName = fName;
         this.lName = lName;
-        this.idType = idType;
         this.firm = firm;
-        this.now = now;
+        this.idType = idType;
     }
 
     public Entry() {
     }
 
-    public LocalDateTime getNow() {
-        now = LocalDateTime.now().withNano(0);
-        return now;
+    public LocalDateTime getDateTime() {
+        time = LocalDateTime.now();
+        return time;
     }
-    public void setDateTime(LocalDateTime now) {
 
-        this.now = now;
+    public void setDateTime(LocalDateTime time) {
+
+        this.time = time;
     }
 
     public String getfName() {
@@ -58,20 +58,14 @@ public class Entry {
         this.firm = firm;
     }
 
-    public LocalDateTime getEntryDateTime() {
-        return now;
-    }
-
-
-
     @Override
     public String toString() {
         return "Entry{" +
                 "fName='" + fName + '\'' +
                 ", lName='" + lName + '\'' +
-                ", idType='" + idType + '\'' +
                 ", firm='" + firm + '\'' +
-                ", now=" + now +
+                ", idType='" + idType + '\'' +
+                /*", now=" + now +*/
                 '}';
     }
 }

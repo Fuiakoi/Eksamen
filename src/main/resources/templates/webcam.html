@@ -1,0 +1,37 @@
+<html>
+<body>
+<video autoplay></video>
+<canvas></canvas>
+<!--<button id="capture">Capture</button>-->
+
+<form method="POST" action="/webcam" enctype="multipart/form-data">
+    <input type="file" name="imageFile">
+    <button type="submit">Capture</button>
+</form>
+
+<script>
+  const video = document.querySelector('video');
+  const canvas = document.querySelector('canvas');
+
+  navigator.mediaDevices.getUserMedia({ video: true })
+          .then(stream => video.srcObject = stream);
+
+  document.querySelector('#capture').addEventListener('click', function () {
+    const context = canvas.getContext('2d');
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imgData = canvas.toDataURL('image/png');
+    // Send this imgData to your Spring Boot application
+  });
+
+  $.ajax({
+    type: "POST",
+    url: "/uploadImage",
+    data: imgData,
+    success: function(data) {
+      // response handling
+    }
+  });
+
+</script>
+</body>
+</html>
