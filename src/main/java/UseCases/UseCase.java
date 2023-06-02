@@ -11,11 +11,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.File;
+import java.io.IOException;
 
+@Service
 public class UseCase {
 
-    static DBSQL db;
-  //  private static Connection connection;
+    static DBSQL db = new DBSQL();
+
+    //  private static Connection connection;
     //private static Statement stmt;
 
     /*static {
@@ -26,14 +32,16 @@ public class UseCase {
         }
     }*/
 
-    public void buildEntry(String fName, String lName, String firm, String idType, LocalDateTime now) {
-        db.entryDK(new Entry(fName, lName, firm, idType, now));
+    public String buildEntry(String fName, String lName, String firm, String idType) {
+        db.entryDKinsert(new Entry(fName, lName, firm, idType));
+        return "";
     }
 
     public String loginCheck(String email, String password) throws SQLException {
         String res = db.getPassword(email);
-        if (res.equals(null))
-            return "Wrong email";
+        if (res == "") {
+            return "";
+        }
         if (res.equals(password)) {
             return "Correct";
         } else {
@@ -70,6 +78,5 @@ public class UseCase {
     }
     //this method is to use the dbsql deleteBasedOnAge, but do it after some time has passed
     public static void deleteOnTime(){
-
     }
 }

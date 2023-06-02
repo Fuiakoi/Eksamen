@@ -11,8 +11,8 @@ import java.sql.SQLException;
 public class Demo11Application {
 	public static void main(String[] args) throws SQLException{
 		SpringApplication.run(Demo11Application.class, args);
-		DBSQL db = new DBSQL();
 
+		DBSQL db = new DBSQL();
 		UseCase UC = new UseCase();
 	}
 }

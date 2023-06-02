@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="da-DK">
+<html lang="da-DK" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,57 +42,67 @@
         </div>
 
         <!-- Tabs -->
-        <div id="Registrer" class="w3-container w3-white w3-padding-16 myLink">
-            <h3>Velkommen til Intec's varehus</h3>
-            <div class="w3-row-padding" style="margin:0 -16px;">
-                <div class="w3-half">
-                    <label>Fornavn</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Indtast fornavn">
+        <form method="post" action="/register" autocomplete="off">
+            <div id="Registrer" class="w3-container w3-white w3-padding-16 myLink">
+                <h3>Velkommen til Intec's varehus</h3>
+                <div class="w3-row-padding" style="margin:0 -16px;">
+                    <div class="w3-half">
+                        <label>Fornavn</label>
+                        <input class="w3-input w3-border" type="text" name="fname" placeholder="Indtast fornavn" required>
+                    </div>
+                    <div class="w3-half">
+                        <label>Efternavn</label>
+                        <input class="w3-input w3-border" type="text" name="lname" placeholder="Indast efternavn" required>
+                    </div>
+                    <div class="w3-half w3-padding-16 dropdown">
+                        <label>Firma</label>
+                        <select name="firm" id="firm" required>
+                            <option value="" selected="selected">Vælg firma</option>
+                            <option value="DHL">DHL</option>
+                            <option value="DSV">DSV</option>
+                            <option value="FedEx">FedEx</option>
+                            <option value="GLS">GLS</option>
+                            <option value="Postnord">Postnord</option>
+                            <option value="UPS">UPS</option>
+                        </select>
+                    </div>
+                    <div class="w3-half w3-padding-16 dropdown">
+                        <label>ID type</label>
+                        <select name="idType" id="idType" required>
+                            <option value="" selected="selected">Vælg ID type</option>
+                            <option value="Kørekort">Kørekort</option>
+                            <option value="Pas">Pas</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="w3-half">
-                    <label>Efternavn</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Indast efternavn">
-                </div>
-                <div class="w3-half w3-padding-16 dropdown">
-                    <label>Firma</label>
-                    <select name="subject" id="subject">
-                        <option value="" selected="selected">Vælg firma</option>
-                    </select>
-                </div>
+                <button class="w3-button w3-indigo" type="submit">Register</button>
             </div>
-            <button class="w3-button w3-indigo">Registrer</button>
-        </div>
+            <!--<video autoplay></video>
+            <canvas></canvas>
+            &lt;!&ndash;<button id="capture">Capture</button>&ndash;&gt;
 
-        <div id="Log ind" class="w3-container w3-white w3-padding-16 myLink">
-            <h3>Velkommen, Admin</h3>
+            <form method="POST" action="/webcam" enctype="multipart/form-data">
+                <input type="file" name="imageFile">
+                <button type="submit">Capture</button>
+            </form>-->
+        </form>
 
-                    <form method="post" action="/index" autocomplete="off">
-                        <div class="w3-row-padding" style="margin:0 -16px;">
-                        <div class="w3-half">
-                            <label for="email">Email</label>
-                            <input class="w3-input w3-border" type="text" id="email" name="email" placeholder="Indtast email">
-                        </div>
-                        <div class="w3-half">
-                            <label for="password">Adgangskode</label>
-                            <input class="w3-input w3-border" type="password" id="password"name="password" placeholder="Indtast adgangskode">
-                        </div>
-                        <button class="w3-button w3-indigo" type="submit">Log ind</button>
-                        </div>
-                    </form>
-            </div>
-            <!--
-            <div class="w3-row-padding" style="margin:0 -16px;">
-                <div class="w3-half">
-                    <label>Brugernavn</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Indtast brugernavn">
+        <form method="post" action="login" autocomplete="off">
+            <div id="Log ind" class="w3-container w3-white w3-padding-16 myLink">
+                <h3>Velkommen, Admin</h3>
+                <div class="w3-row-padding" style="margin:0 -16px;">
+                    <div class="w3-half">
+                        <label for="email">Email</label>
+                        <input class="w3-input w3-border" type="text" id="email" name="email" placeholder="Indtast email" required>
+                    </div>
+                    <div class="w3-half">
+                        <label for="password">Adgangskode</label>
+                        <input class="w3-input w3-border" type="password" id="password"name="password" placeholder="Indtast adgangskode" required>
+                    </div>
                 </div>
-                <div class="w3-half">
-                    <label>Kodeord</label>
-                    <input class="w3-input w3-border" type="text" placeholder="Indtast kodeord">
-                </div>
+                <button class="w3-button w3-indigo w3-margin-top" type="submit">Log ind</button>
             </div>
-            <p><button class="w3-button w3-indigo">Log ind</button></p>
-            -->
+        </form>
 
         <div id="Sprog/Language" class="w3-container w3-white w3-padding-16 myLink">
             <h3>Vælg dit sprog/Choose your language</h3>
@@ -107,7 +117,7 @@
 <div class="footer">
     <h2>Kontakt</h2>
     <p>Kontakt os, hvis du har nogle spørgsmål</p>
-    <i class="fa fa-map-marker" style="width:30px"></i> Danmarksgade 6B, 4690 Haslev, DK<br>
+    <i class="fa fa-map-    marker" style="width:30px"></i> Danmarksgade 6B, 4690 Haslev, DK<br>
     <i class="fa fa-phone" style="width:30px"></i> Telefon: +45 5672 0707<br>
 </div>
 <!-- End page content -->
@@ -132,27 +142,39 @@
     // Click on the first tablink on load
     document.getElementsByClassName("tablink")[0].click();
 
+    function getOption() {
+        selectElement = document.querySelector('#firm');
+        output = selectElement.value;
+        document.querySelector('.output').textContent = output;
+    }
 
-    var subjectObject = {
-        "DHL": {
-        },
-        "DSV": {
-        },
-        "FedEx": {
-        },
-        "GLS": {
-        },
-        "Postnord": {
-        },
-        "UPS": {
-        }
+    function getOption() {
+        selectElement = document.querySelector('#idType');
+        output = selectElement.value;
+        document.querySelector('.output').textContent = output;
     }
-    window.onload = function() {
-        var subjectSel = document.getElementById("subject");
-        for (var x in subjectObject) {
-            subjectSel.options[subjectSel.options.length] = new Option(x, x);
+
+    /*const video = document.querySelector('video');
+    const canvas = document.querySelector('canvas');
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => video.srcObject = stream);
+
+    document.querySelector('#capture').addEventListener('click', function () {
+        const context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const imgData = canvas.toDataURL('image/png');
+        // Send this imgData to your Spring Boot application
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "/uploadImage",
+        data: imgData,
+        success: function(data) {
+            // response handling
         }
-    }
+    });*/
 </script>
 </body>
 </html>
