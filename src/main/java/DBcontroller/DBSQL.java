@@ -3,7 +3,6 @@ package DBcontroller;
 import Entities.Admin;
 import Entities.Entry;
 import org.springframework.cglib.core.Local;
-
 import java.sql.*;
 import java.time.LocalDateTime;
 
@@ -11,9 +10,10 @@ public class DBSQL {
     private static Connection connection;
     private Statement stmt;
     private Statement stmt1;
+    public String realUrl = "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/RegisterSQLite.db";
 
     public DBSQL(){
-        String url = "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/RegisterSQLite.db";
+        String url = realUrl;
 
         try {
             connection = DriverManager.getConnection(url);
@@ -37,6 +37,16 @@ public class DBSQL {
             throwables.printStackTrace();
         }
         // closeConnection();
+    }
+
+    public void openConnection() {
+        String url = realUrl;
+
+        try {
+            connection = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void closeConnection() {
@@ -97,6 +107,7 @@ public class DBSQL {
     public  String getPassword(String email) {
         try {
             String sql = "SELECT password FROM Admin WHERE email = '" + email + "'";
+            openConnection();
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
             ResultSet rs = stmt.getResultSet();

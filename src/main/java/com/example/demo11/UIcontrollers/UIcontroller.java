@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.sql.SQLException;
 
 @Controller
@@ -26,11 +25,11 @@ public class UIcontroller {
         UseCase useCase = new UseCase();
         String res = useCase.loginCheck(email, password);
         if (res == "") {
-            return "index";
+            return "wrongmail";
         } else if (res == "Correct") {
             return "admin";
         } else
-            return "index";
+            return "wrongpassword";
     }
 
     @PostMapping("/newadmin")
@@ -45,7 +44,23 @@ public class UIcontroller {
     public String listEntry() {
         return "listentry";}
 
-    @PostMapping("/wrongemail")
+    @PostMapping("/wrongmail")
     public String wrongEmail() {
-        return "wrongemail";}
+        return "wrongmail";}
+
+    @PostMapping("/wrongpassword")
+    public String wrongPassword() {
+        return "wrongpassword";}
+
+    @PostMapping("/admin")
+    public String admin() {
+        return "admin";}
+
+    @PostMapping("/admindeleted")
+    public String adminDeleted() {
+        return "admindeleted";}
+
+    @PostMapping("/adminmade")
+    public String adminMade() {
+        return "adminmade";}
 }
