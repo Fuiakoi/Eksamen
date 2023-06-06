@@ -3,15 +3,15 @@ package com.example.demo11.UIcontrollers;
 import UseCases.UseCase;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.sql.SQLException;
 
 @Controller
 public class UIcontroller {
 
-    @PostMapping("/index")
+    @GetMapping("/index")
     public String index() {
         return "index";}
 
@@ -26,26 +26,42 @@ public class UIcontroller {
         UseCase useCase = new UseCase();
         String res = useCase.loginCheck(email, password);
         if (res == "") {
-            return "index";
+            return "wrongmail";
         } else if (res == "Correct") {
             return "admin";
         } else
-            return "index";
+            return "wrongpassword";
     }
 
-    @PostMapping("/newadmin")
+    @GetMapping("/newadmin")
     public String newAdmin() {
         return "newadmin";}
 
-    @PostMapping("/deleteadmin")
+    @GetMapping("/deleteadmin")
     public String deleteAdmin() {
         return "deleteadmin";}
 
-    @PostMapping("/listentry")
+    @GetMapping("/listentry")
     public String listEntry() {
         return "listentry";}
 
-    @PostMapping("/wrongemail")
+    @GetMapping("/wrongmail")
     public String wrongEmail() {
-        return "wrongemail";}
+        return "wrongmail";}
+
+    @GetMapping("/wrongpassword")
+    public String wrongPassword() {
+        return "wrongpassword";}
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";}
+
+    @GetMapping("/admindeleted")
+    public String adminDeleted() {
+        return "admindeleted";}
+
+    @GetMapping("/adminmade")
+    public String adminMade() {
+        return "adminmade";}
 }

@@ -42,21 +42,15 @@
 
     <!-- Tabs -->
     <div id="Menu" class="w3-container w3-white w3-padding-16 myLink">
-      <h3>Velkommen til Intec's varehus</h3>
+      <h3>Hvilken admin vil du gerne slette?</h3>
       <div class="w3-row-padding w3-quart" style="margin:0 -16px;">
-        <form method="post" action="newadmin">
-          <button class="w3-button w3-border w3-white">Opret ny admin</button>
-        </form>
-        <form method="post" action="deleteadmin">
-          <button class="w3-button w3-border w3-white">Slet gammel admin</button>
-        </form>
-        <form method="post" action="listentry">
-          <button class="w3-button w3-border w3-white">Se liste</button>
+        <form method="get" action="admindeleted">
+          <button class="w3-button w3-border w3-white">Slet admin</button>
         </form>
       </div>
     </div>
 
-    <form method="post" action="index">
+    <form method="get" action="index">
       <div id="Log ud" class="w3-container w3-white w3-padding-16 myLink">
         <h3>Sikker på at du gerne vil logge ud?</h3>
         <button class="w3-button w3-border w3-white" formaction="index">Log ud</button>
