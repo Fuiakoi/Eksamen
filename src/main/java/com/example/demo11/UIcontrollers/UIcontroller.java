@@ -16,12 +16,13 @@ public class UIcontroller {
         return "index";}
 
     @PostMapping("/register")
-    public String register(@RequestParam String fname, @RequestParam String lname, @RequestParam String firm, @RequestParam String idType, Model model) throws SQLException {
+    public String register(@RequestParam String fname, @RequestParam String lname, @RequestParam String firm,
+                           @RequestParam String idType, Model model) throws SQLException {
         UseCase useCase = new UseCase();
         String res = useCase.buildEntry(fname, lname, firm, idType);
         return "register";}
 
-    @PostMapping("/login")
+    @PostMapping("/login")z
     public String login(@RequestParam String email, @RequestParam String password, Model model) throws SQLException {
         UseCase useCase = new UseCase();
         String res = useCase.loginCheck(email, password);
