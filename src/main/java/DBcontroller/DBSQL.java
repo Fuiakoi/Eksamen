@@ -67,7 +67,9 @@ public class DBSQL {
             stmt.execute(sql);
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
-                System.out.println(rs.getString("fName") + " " + rs.getString("lName") + " " + rs.getString("firm") + " " + rs.getString("idType") + " " + rs.getString("time"));
+                System.out.println(rs.getString("fName") + " " + rs.getString("lName") + " "
+                        + rs.getString("firm") + " " + rs.getString("idType") + " "
+                        + rs.getString("time"));
             }
             stmt.close();
             closeConnection();
@@ -78,7 +80,7 @@ public class DBSQL {
 
     public static void deleteBasedOnAge() {
         try {
-            String sql = "SELECT * FROM Entry WHERE datetime(time) < datetime('now', '-3 years')";
+            String sql = "DELETE FROM Entry WHERE datetime(time) < datetime('now', '-3 years')";
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
             stmt.close();
