@@ -11,7 +11,7 @@ public class DBSQL {
     private Statement stmt;
     private Statement stmt1;
     public String realUrl = "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/RegisterSQLite.db";
-
+// my path in here
     public DBSQL(){
         String url = realUrl;
 
