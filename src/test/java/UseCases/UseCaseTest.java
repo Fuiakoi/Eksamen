@@ -1,10 +1,9 @@
-/*
 package UseCases;
 
 import DBcontroller.DBSQL;
 import org.testng.annotations.Test;
-
 import java.sql.SQLException;
+
 // import static org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -37,4 +36,4 @@ public class UseCaseTest {
         // Verify the interaction with the mock
         verify(dbMock, times(2)).getPassword(email);
     }
-}*/
+}
