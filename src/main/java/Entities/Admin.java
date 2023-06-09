@@ -3,11 +3,12 @@ package Entities;
 public class Admin {
 private String email;
 private String password;
+private Boolean isLoggedIn;
 
     public Admin() {
     }
 
-    public Admin(String email, String password) {
+    public Admin(String email, String password, Boolean isLoggedIn) {
         this.email = email;
         this.password = password;
     }
@@ -26,6 +27,14 @@ private String password;
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setIsLoggedIn(Boolean isLoggedIn) {
+        this.isLoggedIn = isLoggedIn;
+    }
+
+    public Boolean getLoggedIn() {
+        return isLoggedIn;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.demo11;
 
 import DBcontroller.DBSQL;
+import UseCases.Schedule;
 import UseCases.UseCase;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,5 +15,7 @@ public class Demo11Application {
 
 		DBSQL db = new DBSQL();
 		UseCase UC = new UseCase();
+		Schedule scheduler = new Schedule();
+		scheduler.startScheduledDelete();
 	}
 }
