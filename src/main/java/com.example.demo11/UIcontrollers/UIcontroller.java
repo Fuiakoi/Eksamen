@@ -22,7 +22,7 @@ public class UIcontroller {
         String res = useCase.buildEntry(fname, lname, firm, idType);
         return "register";}
 
-    @PostMapping("/login")z
+    @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password, Model model) throws SQLException {
         UseCase useCase = new UseCase();
         String res = useCase.loginCheck(email, password);
