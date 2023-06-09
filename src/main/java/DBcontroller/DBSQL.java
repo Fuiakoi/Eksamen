@@ -10,7 +10,7 @@ public class DBSQL {
     private static Connection connection;
     private Statement stmt;
     private Statement stmt1;
-    public String realUrl = "jdbc:sqlite:C://Users/aikke/Desktop/Eksamen/RegisterSQLite.db";
+    public String realUrl = "jdbc:sqlite:C://Users/aikke/Desktop/Eksamen/udviddet.db";
 //C://Users/mostg/OneDrive/Skrivebord/Eksamen/RegisterSQLite.db
     public DBSQL(){
         String url = realUrl;
@@ -22,7 +22,7 @@ public class DBSQL {
         }
     }
 
-    public static void entryDKinsert(Entry entry) { //todo copypaste til amerikansk, find ud af afgrænsning
+    public static void entryDKinsert(Entry entry) {
         try {
             String sql = "INSERT INTO entry (fName, lName, firm, idType, time) " +
                     "VALUES ('" + entry.getfName() + "','" + entry.getlName() + "','" + entry.getFirm() + "','" + entry.getIdType() + "','" + entry.getDateTime()
