@@ -2,16 +2,17 @@ package DBcontroller;
 
 import Entities.Admin;
 import Entities.Entry;
-import org.springframework.cglib.core.Local;
+
 import java.sql.*;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBSQL {
     private static Connection connection;
     private Statement stmt;
     private Statement stmt1;
-    public String realUrl = "jdbc:sqlite:C://Users/aikke/Desktop/Eksamen/udviddet.db";
-//C://Users/mostg/OneDrive/Skrivebord/Eksamen/RegisterSQLite.db
+    public static String realUrl = "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/udviddet.db";
+
     public DBSQL(){
         String url = realUrl;
 
@@ -24,11 +25,9 @@ public class DBSQL {
 
     public static void entryDKinsert(Entry entry) {
         try {
-            String sql = "INSERT INTO entry (fName, lName, firm, idType, time) " +
+            String sql = "INSERT INTO entry (fName, lName, firm, idType/*, pictureID*/, time) " +
                     "VALUES ('" + entry.getfName() + "','" + entry.getlName() + "','" + entry.getFirm() + "','" + entry.getIdType() + "','" + entry.getDateTime()
-                    + "')";
-            // String sql = "INSERT INTO entry (fName, lName, firm, idType) VALUES ('Sofia', 'Mostgaard', 'IBM', 'Pas')";
-            //guestID, fName, lName, firm, idType, time, IDpicture?
+                    + /*entry.getPictureID() + */"')";
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
             System.out.println("Connection to SQLite has been established. \n");
@@ -39,7 +38,7 @@ public class DBSQL {
         // closeConnection();
     }
 
-    public void openConnection() {
+    public static void openConnection() {
         String url = realUrl;
 
         try {
@@ -60,9 +59,36 @@ public class DBSQL {
     }
 //access til print funktioner //todo efter html implementering
 
-    public void listAccessByPeriod() {
+    public static List<Entry> listAccessByPeriod() {
+        List<Entry> entries = new ArrayList<>();
         try {
             String sql = "SELECT * FROM Entry";
+            openConnection();
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()) {
+                Entry entry = new Entry();
+                entry.setfName(rs.getString("fName"));
+                entry.setlName(rs.getString("lName"));
+                entry.setFirm(rs.getString("firm"));
+                entry.setIdType(rs.getString("idType"));
+                entry.setLocalTime(rs.getString("time"));
+                // entry.setDateTime(LocalDateTime.parse(rs.getString("time")));
+                entries.add(entry);
+            }
+            stmt.close();
+            closeConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return entries;
+    }
+
+    /*public void listAccessByPeriod() {
+        try {
+            String sql = "SELECT * FROM Entry";
+            openConnection();
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
             ResultSet rs = stmt.getResultSet();
@@ -76,7 +102,7 @@ public class DBSQL {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
+    }*/
 
     public static void deleteBasedOnAge() {
         try {
@@ -88,7 +114,6 @@ public class DBSQL {
             throwables.printStackTrace();
         }
     }
-
 
     public static Admin getAdmin(String email) throws SQLException{
         Admin admin = null;
@@ -106,7 +131,7 @@ public class DBSQL {
         return admin;
     }
 
-    public  String getPassword(String email) {
+    public  String getAdminPassword(String email) {
         try {
             String sql = "SELECT password FROM Admin WHERE email = '" + email + "'";
             openConnection();
@@ -127,7 +152,28 @@ public class DBSQL {
         return "";
     }
 
-    public String getEmail(String email) {
+    public  String getUserPassword(String email) {
+        try {
+            String sql = "SELECT password FROM User WHERE email = '" + email + "'";
+            openConnection();
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            ResultSet rs = stmt.getResultSet();
+            if (rs.next()) {
+                String password = rs.getString("password");
+                stmt.close();
+                closeConnection();
+                return password;
+            }
+            return "";
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        closeConnection();
+        return "";
+    }
+
+    /*public String getAdminEmail(String email) {
         String hov;
         try {
             String sql = "SELECT email FROM Admin WHERE email = '" + email + "'";
@@ -144,5 +190,40 @@ public class DBSQL {
             throwables.printStackTrace();
         }
         return null;
-    }
+    }*/
+
+    /*public static String checkEmail(User user) {
+        try {
+            String sql = "SELECT email FROM User WHERE email = '" + user.getEmail() + "'";
+            openConnection();
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            ResultSet rs = stmt.getResultSet();
+            if (rs.next()) {
+                String userExists = rs.getString("");
+                stmt.close();
+                closeConnection();
+                return "UserExists";
+            } else {
+                insertUser(user);
+                return "User created";
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        closeConnection();
+        return "";
+    }*/
+
+    /*public static void insertUser(User user) {
+        try {
+            String sql = "INSERT INTO User (email, password) VALUES ('" + user.getEmail() + "','" + user.getPassword() + "')";
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            stmt.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }*/
 }

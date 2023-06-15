@@ -23,17 +23,17 @@ public class UseCaseTest {
         String wrongPassword = "wrongpassword";
 
         // Stub the behavior of the mock
-        when(dbMock.getPassword(email)).thenReturn(correctPassword);
+        when(dbMock.getAdminPassword(email)).thenReturn(correctPassword);
 
         // Act
-        String resultCorrect = useCase.loginCheck(email, correctPassword);
-        String resultWrong = useCase.loginCheck(email, wrongPassword);
+        String resultCorrect = useCase.adminLoginCheck(email, correctPassword);
+        String resultWrong = useCase.adminLoginCheck(email, wrongPassword);
 
         // Assert
         assertEquals("Correct", resultCorrect);
         assertEquals("Wrong password", resultWrong);
 
         // Verify the interaction with the mock
-        verify(dbMock, times(2)).getPassword(email);
+        verify(dbMock, times(2)).getAdminPassword(email);
     }
 }
