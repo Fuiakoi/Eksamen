@@ -1,8 +1,7 @@
-<!--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="da-DK">
-<head>-->
-
-  <!--<meta charset="UTF-8">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
@@ -12,6 +11,18 @@
   <style>
     body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     .myLink {display: none}
+
+    table{
+      width: 100%;}
+
+    th, td {
+      text-align: left;
+      padding: 16px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
 
     .footer {
       position: fixed;
@@ -27,12 +38,12 @@
 </head>
 <body class="w3-white">
 
-&lt;!&ndash; Navigation Bar &ndash;&gt;
+<!-- Navigation Bar -->
 <div class="w3-bar w3-white w3-border-bottom w3-xlarge w3-padding-16">
   <img src="Logo.jpg" style="max-width:15%;">
 </div>
 
-&lt;!&ndash; Header &ndash;&gt;
+<!-- Header -->
 <header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
   <img class="w3-image" src="Serverroom.jpg" alt="serverroom" style="width:100%;heigth:100%;">
   <div class="w3-display-middle" style="width:65%">
@@ -41,14 +52,14 @@
       <button class="w3-bar-item w3-button tablink w3-right" onclick="openLink(event, 'Log ud');"></i>Log ud</button>
     </div>
 
-    &lt;!&ndash; Tabs &ndash;&gt;
-    <div id="Menu" class="w3-container w3-white w3-padding-16 myLink">
+    <!-- Tabs -->
+    <div id="Menu" class="w3-container w3-white w3-padding-16 myLink" style="overflow-y:auto">
       <h3>Her kan du se en liste over hvem der har været på lageret</h3>
-      <div class="w3-row-padding w3-quart" style="margin:0 -16px;">
-        <form method="get" action="admin">
-          <button class="w3-button w3-border w3-white">Tilbage</button>
-        </form>
-      </div>
+      <iframe src="/entry" style="width: 100%">
+      </iframe>
+      <form method="get" action="admin">
+        <button class="w3-button w3-border w3-white">Tilbage</button>
+      </form>
     </div>
 
     <form method="get" action="index">
@@ -60,14 +71,14 @@
   </div>
 </header>
 
-&lt;!&ndash; Contact &ndash;&gt;
+<!-- Contact -->
 <div class="footer">
   <h2>Kontakt</h2>
   <p>Kontakt os, hvis du har nogle spørgsmål</p>
   <i class="fa fa-map-marker" style="width:30px"></i> Danmarksgade 6B, 4690 Haslev, DK<br>
   <i class="fa fa-phone" style="width:30px"></i> Telefon: +45 5672 0707<br>
 </div>
-&lt;!&ndash; End page content &ndash;&gt;
+<!-- End page content -->
 </div>
 
 <script>
@@ -88,103 +99,6 @@
 
   // Click on the first tablink on load
   document.getElementsByClassName("tablink")[0].click();
-</script>-->
-
-<!--
-<body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-      $(document).ready(function() {
-        $.ajax({
-          url: "listentry",
-          success: function(data) {
-            $("#table-container").html(data);
-          }
-        });
-      });
-    </script>
-  </head>
-<div id="table-container"></div>
-</body>
-</html>-->
-
-<!--
-<!DOCTYPE html>
-<html>
-<head>
-  <title>List Entry</title>
-  <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    th, td {
-      border: 1px solid black;
-      padding: 8px;
-    }
-  </style>
-</head>
-<body>
-<h1>List Entry</h1>
-<table>
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Firm</th>
-    <th>ID Type</th>
-    <th>Time</th>
-  </tr>
-  &lt;!&ndash; Loop through the accessByPeriod list to generate table rows &ndash;&gt;
-  {{#each buildHTMLTableByPeriod}}
-  <tr>
-    <td>entry.getFName()</td>
-    <td>{{this.lastName}}</td>
-    <td>{{this.firm}}</td>
-    <td>{{this.idType}}</td>
-    <td>{{this.time}}</td>
-  </tr>
-  {{/each}}
-</table>
-</body>
-</html>-->
-
-<!DOCTYPE html>
-<html>
-<head>
-  <title>List Entry</title>
-  <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    th, td {
-      border: 1px solid black;
-      padding: 8px;
-    }
-  </style>
-</head>
-<body>
-<h1>List Entry</h1>
-<table>
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Firm</th>
-    <th>ID Type</th>
-    <th>Time</th>
-  </tr>
-  <!-- Loop through the accessByPeriod list received from the model -->
-  <th:block th:each='entry : ${accessByPeriod}'>
-    <tr>
-      <td th:text='${entry.fName}'></td>
-      <td th:text='${entry.lName}'></td>
-      <td th:text='${entry.firm}'></td>
-      <td th:text='${entry.idType}'></td>
-      <td th:text='${entry.localTime}'></td>
-    </tr>
-  </th:block>
-</table>
+</script>
 </body>
 </html>
