@@ -1,23 +1,43 @@
 <!DOCTYPE html>
-<html lang="da-DK" xmlns:th="http://www.thymeleaf.org">
+<html lang="da-DK">
 <head>
-    <meta charset="UTF-8">
-    <title>Se liste - Intec</title>
+  <meta charset="UTF-8">
+  <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+    .myLink {display: none}
+
+    table{
+      width: 100%;}
+
+    th, td {
+      text-align: left;
+      padding: 16px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
 </head>
-<body>
-  <table>
-    <thead>
-      <tr>
-        <th>Column 1</th>
-        <th>Column 2</th>
-      </tr>
-    </thead>
-      <tbody>
-        <tr th.each="">
-          <td>Row 1</td>
-          <td>Row 1</td>
-        </tr>
-      </tbody>
-  </table>
+<body class="w3-white">
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Firm</th>
+    <th>ID Type</th>
+    <th>Time</th>
+  </tr>
+  <!-- Loop through the accessByPeriod list received from the model -->
+  <th:block th:each='entry : ${accessByPeriod}'>
+    <tr>
+      <td th:text='${entry.fName}'></td>
+      <td th:text='${entry.lName}'></td>
+      <td th:text='${entry.firm}'></td>
+      <td th:text='${entry.idType}'></td>
+      <td th:text='${entry.localTime}'></td>
+    </tr>
+  </th:block>
+</table>
 </body>
 </html>

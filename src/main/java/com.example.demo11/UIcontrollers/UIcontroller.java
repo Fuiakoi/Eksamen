@@ -72,12 +72,16 @@ public class UIcontroller {
         return "deleteadmin";}
 
     @GetMapping("/listentry")
-    public String listEntry(Model model) {
+    public String listEntry() {
+        return "listentry";}
+
+    @GetMapping("/entry")
+    public String entry(Model model) {
         List<Entry> accessByPeriod = listAccessByPeriod();// Call the listAccessByPeriod method to get the data
         Entry test = accessByPeriod.get(1);
         System.out.println(test.getLocalTime());
         model.addAttribute("accessByPeriod", accessByPeriod); // Add the accessByPeriod list to the model
-        return "listentry";
+        return "entry";
     }
 
     @GetMapping("/wrongmail")
