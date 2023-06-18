@@ -36,7 +36,7 @@
     <img class="w3-image" src="Serverroom.jpg" alt="serverroom" style="width:100%;heigth:100%;">
     <div class="w3-display-middle" style="width:65%">
         <div class="w3-bar w3-dark-grey">
-            <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'register');"></i>Besøgende</button>
+            <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Register');"></i>Besøgende</button>
             <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'User');"></i>Bruger</button>
             <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Admin');"></i>Admin</button>
             <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Sprog/Language');"></i>Sprog/Language</button>
@@ -44,7 +44,7 @@
 
         <!-- Tabs -->
         <form method="post" action="/register" autocomplete="off">
-            <div id="register" class="w3-container w3-white w3-padding-16 myLink">
+            <div id="Register" class="w3-container w3-white w3-padding-16 myLink">
                 <h3>Velkommen til Intec's varehus</h3>
                 <div class="w3-row-padding" style="margin:0 -16px;">
                     <div class="w3-half">
@@ -78,59 +78,56 @@
                 </div>
             </div>
         </form>
-    </div>
 
-    <!--<video autoplay></video>
-    <canvas></canvas>
-    <button id="capture">Capture</button>
+        <!--<video autoplay></video>
+        <canvas></canvas>
+        <button id="capture">Capture</button>
 
-    <form method="POST" action="/webcam" enctype="multipart/form-data">
-        <input type="file" name="imageFile">
-        <button type="submit">Capture</button>
-    </form>-->
+        <form method="POST" action="/webcam" enctype="multipart/form-data">
+            <input type="file" name="imageFile">
+            <button type="submit">Capture</button>
+        </form>-->
 
-    </form>
-
-    <form method="post" action="userlogin" autocomplete="off">
-        <div id="User" class="w3-container w3-white w3-padding-16 myLink">
-            <h3>Velkommen, bruger</h3>
-            <div class="w3-row-padding" style="margin:0 -16px;">
-                <div class="w3-half">
-                    <label for="email">Email</label>
-                    <input class="w3-input w3-border" type="text" id="email" name="email" placeholder="Indtast email" required>
+        <form method="post" action="userlogin" autocomplete="off">
+            <div id="User" class="w3-container w3-white w3-padding-16 myLink">
+                <h3>Velkommen, bruger</h3>
+                <div class="w3-row-padding" style="margin:0 -16px;">
+                    <div class="w3-half">
+                        <label for="email">Email</label>
+                        <input class="w3-input w3-border" type="text" id="email" name="email" placeholder="Indtast email" required>
+                    </div>
+                    <div class="w3-half">
+                        <label for="userpassword">Adgangskode</label>
+                        <input class="w3-input w3-border" type="password" id="userpassword"name="password" placeholder="Indtast adgangskode" required>
+                    </div>
                 </div>
-                <div class="w3-half">
-                    <label for="userpassword">Adgangskode</label>
-                    <input class="w3-input w3-border" type="password" id="userpassword"name="password" placeholder="Indtast adgangskode" required>
-                </div>
+                <button class="w3-button w3-indigo w3-margin-top" type="submit">Log ind</button>
             </div>
-            <button class="w3-button w3-indigo w3-margin-top" type="submit">Log ind</button>
-        </div>
-    </form>
+        </form>
 
-    <form method="post" action="adminlogin" autocomplete="off">
-        <div id="Admin" class="w3-container w3-white w3-padding-16 myLink">
-            <h3>Velkommen, admin</h3>
-            <div class="w3-row-padding" style="margin:0 -16px;">
-                <div class="w3-half">
-                    <label for="adminemail">Email</label>
-                    <input class="w3-input w3-border" type="text" id="adminemail" name="email" placeholder="Indtast email" required>
+        <form method="post" action="adminlogin" autocomplete="off">
+            <div id="Admin" class="w3-container w3-white w3-padding-16 myLink">
+                <h3>Velkommen, admin</h3>
+                <div class="w3-row-padding" style="margin:0 -16px;">
+                    <div class="w3-half">
+                        <label for="adminemail">Email</label>
+                        <input class="w3-input w3-border" type="text" id="adminemail" name="email" placeholder="Indtast email" required>
+                    </div>
+                    <div class="w3-half">
+                        <label for="adminpassword">Adgangskode</label>
+                        <input class="w3-input w3-border" type="password" id="adminpassword"name="password" placeholder="Indtast adgangskode" required>
+                    </div>
                 </div>
-                <div class="w3-half">
-                    <label for="adminpassword">Adgangskode</label>
-                    <input class="w3-input w3-border" type="password" id="adminpassword"name="password" placeholder="Indtast adgangskode" required>
-                </div>
+                <button class="w3-button w3-indigo w3-margin-top" type="submit">Log ind</button>
             </div>
-            <button class="w3-button w3-indigo w3-margin-top" type="submit">Log ind</button>
-        </div>
-    </form>
+        </form>
 
-    <div id="Sprog/Language" class="w3-container w3-white w3-padding-16 myLink">
-        <h3>Vælg dit sprog/Choose your language</h3>
-        <p>Her kan du vælge dit sprog/Here you can choose your language</p>
-        <button class="w3-button w3-border w3-white">Dansk</button>
-        <button class="w3-button w3-border w3-white">English</button>
-    </div>
+        <div id="Sprog/Language" class="w3-container w3-white w3-padding-16 myLink">
+            <h3>Vælg dit sprog/Choose your language</h3>
+            <p>Her kan du vælge dit sprog/Here you can choose your language</p>
+            <button class="w3-button w3-border w3-white">Dansk</button>
+            <button class="w3-button w3-border w3-white">English</button>
+        </div>
     </div>
 </header>
 
@@ -140,8 +137,6 @@
     <p>Kontakt os, hvis du har nogle spørgsmål</p>
     <i class="fa fa-map-    marker" style="width:30px"></i> Danmarksgade 6B, 4690 Haslev, DK<br>
     <i class="fa fa-phone" style="width:30px"></i> Telefon: +45 5672 0707<br>
-</div>
-<!-- End page content -->
 </div>
 
 <script>

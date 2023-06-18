@@ -2,7 +2,6 @@ package DBcontroller;
 
 import Entities.Admin;
 import Entities.Entry;
-import Entities.Firm;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,8 +11,8 @@ public class DBSQL {
     private static Connection connection;
     private Statement stmt;
     private Statement stmt1;
-    public static String realUrl = "jdbc:sqlite:C://Users/aikke/Desktop/Eksamen/udviddet.db";
-//C://Users/mostg/OneDrive/Skrivebord/Eksamen/udviddet.db
+    public static String realUrl = /*"jdbc:sqlite:C://Users/aikke/Desktop/Eksamen/udviddet.db";*/
+                                    "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/udviddet.db";
     public DBSQL(){
         String url = realUrl;
 

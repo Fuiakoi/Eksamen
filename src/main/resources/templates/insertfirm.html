@@ -42,15 +42,17 @@
 
     <!-- Tabs -->
     <div id="Menu" class="w3-container w3-white w3-padding-16 myLink">
-      <h3>Hvilken bruger vil du gerne oprette?</h3>
-      <div class="w3-row-padding w3-quart" style="margin:0 -16px;">
-        <form method="get" action="firminserted">
-          <div class="w3-half">
-            <label>Leverandør navn</label>
+      <h3>Hvilken leverandør vil du gerne oprette?</h3>
+      <div class="w3-row-padding" style="margin:0 -16px;">
+        <div class="w3-half">
+          <form method="post" action="firminserted" autocomplete="off">
+            <label>Leverandørnavn</label>
             <input class="w3-input w3-border" type="text" name="firmName" placeholder="Indtast leverandørnavn" required>
-          </div>
-          <button class="w3-button w3-border w3-white">Opret leverandør</button>
-        </form>
+            <div>
+              <button class="w3-button w3-indigo w3-margin-top" type="submit">Opret leverandør</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 
