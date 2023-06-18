@@ -25,7 +25,8 @@ public class UIcontroller {
                            @RequestParam String idType/*, @RequestParam String pictureID*/, Model model) throws SQLException {
         UseCase useCase = new UseCase();
         String res = useCase.buildEntry(fname, lname, firm, idType/*, pictureID*/);
-        return "register";}
+        return "register";
+    }
 
     @PostMapping("/adminlogin")
     public String adminLogin(@RequestParam String email, @RequestParam String password, Model model) throws SQLException {
@@ -65,15 +66,18 @@ public class UIcontroller {
 
     @GetMapping("/newadmin")
     public String newAdmin() {
-        return "newadmin";}
+        return "newadmin";
+    }
 
     @GetMapping("/deleteadmin")
     public String deleteAdmin() {
-        return "deleteadmin";}
+        return "deleteadmin";
+    }
 
     @GetMapping("/listentry")
     public String listEntry() {
-        return "listentry";}
+        return "listentry";
+    }
 
     @GetMapping("/entry")
     public String entry(Model model) {
@@ -84,11 +88,13 @@ public class UIcontroller {
 
     @GetMapping("/wrongmail")
     public String wrongEmail() {
-        return "wrongmail";}
+        return "wrongmail";
+    }
 
     @GetMapping("/wrongpassword")
     public String wrongPassword() {
-        return "wrongpassword";}
+        return "wrongpassword";
+    }
 
     @GetMapping("/admin")
     public String admin() {
@@ -102,11 +108,13 @@ public class UIcontroller {
 
     @GetMapping("/admindeleted")
     public String adminDeleted() {
-        return "admindeleted";}
+        return "admindeleted";
+    }
 
     @PostMapping("/adminmade")
     public String adminMade() {
-        return "adminmade";}
+        return "adminmade";
+    }
 
     @GetMapping("/newuser")
     public String newUser(/*@RequestParam User email, @RequestParam String password, Model model*/) /*throws SQLException*/ {
@@ -122,24 +130,44 @@ public class UIcontroller {
 
     @PostMapping("/usermade")
     public String userMade() {
-        return "usermade";}
+        return "usermade";
+    }
 
     @GetMapping("/deleteuser")
     public String deleteUser() {
-        return "deleteuser";}
+        return "deleteuser";
+    }
 
     @GetMapping("/userdeleted")
     public String userDeleted() {
-        return "userdeleted";}
+        return "userdeleted";
+    }
 
     @GetMapping("/user")
     public String user() {
-        return "user";}
+        return "user";
+    }
 
     @GetMapping({"/", "/index"})
     public String index(Model model) {
         List<String> firmNames = UseCase.getFirmNames();
         model.addAttribute("firmNames", firmNames);
         return "index";
+    }
+
+  /*  @PostMapping("/insertfirm")
+    public String insertFirm(@RequestParam"", Model model) {
+        *//*UseCase.insertFirm("TestService");*//*
+        UseCase useCase = new UseCase();
+        String res = UseCase.insertFirm("");
+        return "insertfirm";
+    }
+}*/
+
+    @PostMapping("/insertfirm")
+    public String insertFirm(@RequestParam("firmName") String firmName) {
+        UseCase useCase = new UseCase();
+        useCase.insertFirm(firmName);
+        return "insertfirm";
     }
 }

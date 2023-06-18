@@ -2,6 +2,7 @@ package DBcontroller;
 
 import Entities.Admin;
 import Entities.Entry;
+import Entities.Firm;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ public class DBSQL {
     private static Connection connection;
     private Statement stmt;
     private Statement stmt1;
-    public static String realUrl = "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/udviddet.db";
-
+    public static String realUrl = "jdbc:sqlite:C://Users/aikke/Desktop/Eksamen/udviddet.db";
+//C://Users/mostg/OneDrive/Skrivebord/Eksamen/udviddet.db
     public DBSQL(){
         String url = realUrl;
 
@@ -173,6 +174,22 @@ public class DBSQL {
         closeConnection();
         return "";
     }
+
+    public static void firmInsert(String firm) {
+        try {
+            String sql = "INSERT INTO Firm (firmName) " +
+                    "VALUES ('" + firm + "')";
+            openConnection();
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            System.out.println("Connection to SQLite has been established. \n");
+            stmt.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        // closeConnection();
+    }
+
 
     /*public String getAdminEmail(String email) {
         String hov;

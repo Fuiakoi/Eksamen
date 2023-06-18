@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLException;
 import java.util.List;
 
+import static DBcontroller.DBSQL.firmInsert;
+
 @Service
 public class UseCase {
 
@@ -16,7 +18,6 @@ public class UseCase {
         db.entryDKinsert(new Entry(fName, lName, firm, idType/*, pictureID*/));
         return "";
     }
-
     public String adminLoginCheck(String email, String password) throws SQLException {
         String res = db.getAdminPassword(email);
         if (res == "") {
@@ -82,9 +83,15 @@ public class UseCase {
     public static List<String> getFirmNames() {
         List<String> firmNames = DBSQL.dropdownFirms();
         for (String name : firmNames) {
-            System.out.println(name);
+     //       System.out.println(name);
         }
         return firmNames;
+    }
+
+    public static String insertFirm(String firmName){
+        firmInsert(firmName);
+        System.out.println("overført");
+        return firmName;
     }
 
 }
