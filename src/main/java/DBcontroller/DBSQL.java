@@ -28,6 +28,7 @@ public class DBSQL {
             String sql = "INSERT INTO entry (fName, lName, firm, idType/*, pictureID*/, time) " +
                     "VALUES ('" + entry.getfName() + "','" + entry.getlName() + "','" + entry.getFirm() + "','" + entry.getIdType() + "','" + entry.getDateTime()
                     + /*entry.getPictureID() + */"')";
+                    openConnection();
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
             System.out.println("Connection to SQLite has been established. \n");
@@ -226,4 +227,46 @@ public class DBSQL {
             throwables.printStackTrace();
         }
     }*/
+
+    /*public static List<String> dropdownFirms() {
+        List<String> firmList = new ArrayList<>();
+        try {
+            String sql = "SELECT firmName FROM Firm";
+            openConnection();
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()) {
+                String firmName = rs.getString("firmName");
+                System.out.println("Found firm name: " + firmName);  // Print each firm name
+                firmList.add(firmName);
+            }
+            stmt.close();
+            closeConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        System.out.println("Final firm list: " + firmList);  // Print the final firm list
+        return firmList;
+    }*/
+
+
+    public static List<String> dropdownFirms() {
+        List<String> firmList = new ArrayList<>();
+        try {
+            String sql = "SELECT firmName FROM Firm";
+            openConnection();
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()) {
+                firmList.add(rs.getString("firmName"));
+            }
+            stmt.close();
+            closeConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return firmList;
+    }
 }
