@@ -3,6 +3,9 @@ package Entities;
 public class Firm {
     private String firmName;
 
+    public Firm() {
+    }
+
     public Firm(String firmName) {
         this.firmName = firmName;
     }

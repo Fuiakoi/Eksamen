@@ -56,16 +56,13 @@
                         <input class="w3-input w3-border" type="text" name="lname" placeholder="Indast efternavn" required>
                     </div>
                     <div class="w3-half w3-padding-16 dropdown">
-                        <label>Firma</label>
-                        <select name="firm" id="firm" required>
-                            <option value="" selected="selected">Vælg firma</option>
-                            <option value="DHL">DHL</option>
-                            <option value="DSV">DSV</option>
-                            <option value="FedEx">FedEx</option>
-                            <option value="GLS">GLS</option>
-                            <option value="Postnord">Postnord</option>
-                            <option value="UPS">UPS</option>
-                        </select>
+                        <form onsubmit="submitForm(); return false;">
+                            <label for="firm">Vælg firma:</label>
+                            <select id="firm" name="firm" required>
+                                <option value="" selected="selected">Vælg firma</option>
+                                <option th:each="firmName : ${firmNames}" th:text="${firmName}"></option>
+                            </select>
+                        </form>
                     </div>
                     <div class="w3-half w3-padding-16 dropdown">
                         <label>ID type</label>
@@ -75,67 +72,65 @@
                             <option value="Pas">Pas</option>
                         </select>
                     </div>
-                </div>
-                <button class="w3-button w3-indigo" type="submit">Registrer</button>
-            </div>
-
-
-
-
-            <!--<video autoplay></video>
-            <canvas></canvas>
-            <button id="capture">Capture</button>
-
-            <form method="POST" action="/webcam" enctype="multipart/form-data">
-                <input type="file" name="imageFile">
-                <button type="submit">Capture</button>
-            </form>-->
-
-
-
-
-        </form>
-
-        <form method="post" action="userlogin" autocomplete="off">
-            <div id="User" class="w3-container w3-white w3-padding-16 myLink">
-                <h3>Velkommen, bruger</h3>
-                <div class="w3-row-padding" style="margin:0 -16px;">
-                    <div class="w3-half">
-                        <label for="email">Email</label>
-                        <input class="w3-input w3-border" type="text" id="email" name="email" placeholder="Indtast email" required>
-                    </div>
-                    <div class="w3-half">
-                        <label for="userpassword">Adgangskode</label>
-                        <input class="w3-input w3-border" type="password" id="userpassword"name="password" placeholder="Indtast adgangskode" required>
+                    <div>
+                        <button class="w3-button w3-indigo" type="submit">Registrer</button>
                     </div>
                 </div>
-                <button class="w3-button w3-indigo w3-margin-top" type="submit">Log ind</button>
             </div>
         </form>
+    </div>
 
-        <form method="post" action="adminlogin" autocomplete="off">
-            <div id="Admin" class="w3-container w3-white w3-padding-16 myLink">
-                <h3>Velkommen, admin</h3>
-                <div class="w3-row-padding" style="margin:0 -16px;">
-                    <div class="w3-half">
-                        <label for="adminemail">Email</label>
-                        <input class="w3-input w3-border" type="text" id="adminemail" name="email" placeholder="Indtast email" required>
-                    </div>
-                    <div class="w3-half">
-                        <label for="adminpassword">Adgangskode</label>
-                        <input class="w3-input w3-border" type="password" id="adminpassword"name="password" placeholder="Indtast adgangskode" required>
-                    </div>
+    <!--<video autoplay></video>
+    <canvas></canvas>
+    <button id="capture">Capture</button>
+
+    <form method="POST" action="/webcam" enctype="multipart/form-data">
+        <input type="file" name="imageFile">
+        <button type="submit">Capture</button>
+    </form>-->
+
+    </form>
+
+    <form method="post" action="userlogin" autocomplete="off">
+        <div id="User" class="w3-container w3-white w3-padding-16 myLink">
+            <h3>Velkommen, bruger</h3>
+            <div class="w3-row-padding" style="margin:0 -16px;">
+                <div class="w3-half">
+                    <label for="email">Email</label>
+                    <input class="w3-input w3-border" type="text" id="email" name="email" placeholder="Indtast email" required>
                 </div>
-                <button class="w3-button w3-indigo w3-margin-top" type="submit">Log ind</button>
+                <div class="w3-half">
+                    <label for="userpassword">Adgangskode</label>
+                    <input class="w3-input w3-border" type="password" id="userpassword"name="password" placeholder="Indtast adgangskode" required>
+                </div>
             </div>
-        </form>
-
-        <div id="Sprog/Language" class="w3-container w3-white w3-padding-16 myLink">
-            <h3>Vælg dit sprog/Choose your language</h3>
-            <p>Her kan du vælge dit sprog/Here you can choose your language</p>
-            <button class="w3-button w3-border w3-white">Dansk</button>
-            <button class="w3-button w3-border w3-white">English</button>
+            <button class="w3-button w3-indigo w3-margin-top" type="submit">Log ind</button>
         </div>
+    </form>
+
+    <form method="post" action="adminlogin" autocomplete="off">
+        <div id="Admin" class="w3-container w3-white w3-padding-16 myLink">
+            <h3>Velkommen, admin</h3>
+            <div class="w3-row-padding" style="margin:0 -16px;">
+                <div class="w3-half">
+                    <label for="adminemail">Email</label>
+                    <input class="w3-input w3-border" type="text" id="adminemail" name="email" placeholder="Indtast email" required>
+                </div>
+                <div class="w3-half">
+                    <label for="adminpassword">Adgangskode</label>
+                    <input class="w3-input w3-border" type="password" id="adminpassword"name="password" placeholder="Indtast adgangskode" required>
+                </div>
+            </div>
+            <button class="w3-button w3-indigo w3-margin-top" type="submit">Log ind</button>
+        </div>
+    </form>
+
+    <div id="Sprog/Language" class="w3-container w3-white w3-padding-16 myLink">
+        <h3>Vælg dit sprog/Choose your language</h3>
+        <p>Her kan du vælge dit sprog/Here you can choose your language</p>
+        <button class="w3-button w3-border w3-white">Dansk</button>
+        <button class="w3-button w3-border w3-white">English</button>
+    </div>
     </div>
 </header>
 
@@ -168,10 +163,10 @@
     // Click on the first tablink on load
     document.getElementsByClassName("tablink")[0].click();
 
-    function getOption() {
-        selectElement = document.querySelector('#firm');
-        output = selectElement.value;
-        document.querySelector('.output').textContent = output;
+    function submitForm() {
+        var firmSelect = document.getElementById("firm");
+        var selectedFirm = firmSelect.options[firmSelect.selectedIndex].text;
+        alert("Selected Firm: " + selectedFirm);
     }
 
     function getOption() {

@@ -16,9 +16,9 @@ import static DBcontroller.DBSQL.listAccessByPeriod;
 @Controller
 public class UIcontroller {
 
-    @GetMapping("/index")
+    /*@GetMapping("/index")
     public String index() {
-        return "index";}
+        return "index";}*/
 
     @PostMapping("/register")
     public String register(@RequestParam String fname, @RequestParam String lname, @RequestParam String firm,
@@ -78,8 +78,6 @@ public class UIcontroller {
     @GetMapping("/entry")
     public String entry(Model model) {
         List<Entry> accessByPeriod = listAccessByPeriod();// Call the listAccessByPeriod method to get the data
-        Entry test = accessByPeriod.get(1);
-        System.out.println(test.getLocalTime());
         model.addAttribute("accessByPeriod", accessByPeriod); // Add the accessByPeriod list to the model
         return "entry";
     }
@@ -137,4 +135,11 @@ public class UIcontroller {
     @GetMapping("/user")
     public String user() {
         return "user";}
+
+    @GetMapping({"/", "/index"})
+    public String index(Model model) {
+        List<String> firmNames = UseCase.getFirmNames();
+        model.addAttribute("firmNames", firmNames);
+        return "index";
+    }
 }
