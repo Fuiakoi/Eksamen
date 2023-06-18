@@ -164,10 +164,15 @@ public class UIcontroller {
     }
 }*/
 
-    @PostMapping("/insertfirm")
-    public String insertFirm(@RequestParam("firmName") String firmName) {
+    @GetMapping("/insertfirm")
+    public String insertFirm() {
+        return "insertfirm";
+    }
+
+    @PostMapping("/firminserted")
+    public String firmInserted(@RequestParam String firmName) {
         UseCase useCase = new UseCase();
         useCase.insertFirm(firmName);
-        return "insertfirm";
+        return "firminserted";
     }
 }
