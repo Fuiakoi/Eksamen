@@ -204,41 +204,20 @@ public class DBSQL {
         }
         closeConnection();
     }
-
-    /*public static String checkEmail(User user) {
+    public static void userDelete(String email){
+        System.out.println("DB call 1");
         try {
-            String sql = "SELECT email FROM User WHERE email = '" + user.getEmail() + "'";
+            String sql = "DELETE FROM User WHERE email = '" + email + "'";
             openConnection();
             Statement stmt = connection.createStatement();
+            System.out.println("stmt next 1");
             stmt.execute(sql);
-            ResultSet rs = stmt.getResultSet();
-            if (rs.next()) {
-                String userExists = rs.getString("");
-                stmt.close();
-                closeConnection();
-                return "UserExists";
-            } else {
-                insertUser(user);
-                return "User created";
-            }
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        closeConnection();
-        return "";
-    }
-
-    public static void insertUser(User user) {
-        try {
-            String sql = "INSERT INTO User (email, password) VALUES ('" + user.getEmail() + "','" + user.getPassword() + "')";
-            Statement stmt = connection.createStatement();
-            stmt.execute(sql);
+            System.out.println("stmt done");
             stmt.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }*/
 
-
+    }
 }
+

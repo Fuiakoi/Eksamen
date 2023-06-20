@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static DBcontroller.DBSQL.firmInsert;
+import static DBcontroller.DBSQL.userDelete;
 
 @Service
 public class UseCase {
@@ -63,5 +64,14 @@ public class UseCase {
     public static String insertFirm(String firmName){
         firmInsert(firmName);
         return firmName;
+    }
+    public void deleteAdmin(){
+
+    }
+    public static String deleteUser(String email){
+        System.out.println("usecase trigger 1");
+        userDelete(email);
+        System.out.println("usecase call 1");
+        return "user deleted";
     }
 }
