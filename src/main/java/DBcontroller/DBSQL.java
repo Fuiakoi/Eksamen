@@ -1,6 +1,5 @@
 package DBcontroller;
 
-import Entities.Admin;
 import Entities.Entry;
 
 import java.sql.*;
@@ -12,7 +11,7 @@ public class DBSQL {
     private Statement stmt;
     private Statement stmt1;
     public static String realUrl = /*"jdbc:sqlite:C://Users/aikke/Desktop/Eksamen/udviddet.db";*/
-                                    "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/udviddet.db";
+            "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/udviddet.db";
     public DBSQL(){
         String url = realUrl;
 
@@ -21,22 +20,6 @@ public class DBSQL {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void entryDKinsert(Entry entry) {
-        try {
-            String sql = "INSERT INTO entry (fName, lName, firm, idType/*, pictureID*/, time) " +
-                    "VALUES ('" + entry.getfName() + "','" + entry.getlName() + "','" + entry.getFirm() + "','" + entry.getIdType() + "','" + entry.getDateTime()
-                    + /*entry.getPictureID() + */"')";
-                    openConnection();
-            Statement stmt = connection.createStatement();
-            stmt.execute(sql);
-            System.out.println("Connection to SQLite has been established. \n");
-            stmt.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        // closeConnection();
     }
 
     public static void openConnection() {
@@ -58,99 +41,40 @@ public class DBSQL {
             throwables.printStackTrace();
         }
     }
-//access til print funktioner //todo efter html implementering
 
-    public static List<Entry> listAccessByPeriod() {
-        List<Entry> entries = new ArrayList<>();
+    public static List<String> dropdownFirms() {
+        List<String> firmList = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Entry";
+            String sql = "SELECT firmName FROM Firm";
             openConnection();
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
-                Entry entry = new Entry();
-                entry.setfName(rs.getString("fName"));
-                entry.setlName(rs.getString("lName"));
-                entry.setFirm(rs.getString("firm"));
-                entry.setIdType(rs.getString("idType"));
-                entry.setLocalTime(rs.getString("time"));
-                // entry.setDateTime(LocalDateTime.parse(rs.getString("time")));
-                entries.add(entry);
+                firmList.add(rs.getString("firmName"));
             }
             stmt.close();
             closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return entries;
+        return firmList;
     }
 
-    /*public void listAccessByPeriod() {
+    public static void entryDKinsert(Entry entry) {
         try {
-            String sql = "SELECT * FROM Entry";
+            String sql = "INSERT INTO entry (fName, lName, firm, idType, time) " +
+                    "VALUES ('" + entry.getfName() + "','" + entry.getlName() + "','" + entry.getFirm() + "','" + entry.getIdType() + "','" + entry.getDateTime()
+                    + "')";
             openConnection();
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
-            ResultSet rs = stmt.getResultSet();
-            while (rs.next()) {
-                System.out.println(rs.getString("fName") + " " + rs.getString("lName") + " "
-                        + rs.getString("firm") + " " + rs.getString("idType") + " "
-                        + rs.getString("time"));
-            }
-            stmt.close();
-            closeConnection();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }*/
-
-    public static void deleteBasedOnAge() {
-        try {
-            String sql = "DELETE FROM Entry WHERE datetime(time) < datetime('now', '-3 years')";
-            Statement stmt = connection.createStatement();
-            stmt.execute(sql);
+            System.out.println("Connection to SQLite has been established. \n");
             stmt.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
-
-    public static Admin getAdmin(String email) throws SQLException{
-        Admin admin = null;
-        String sql = "SELECT email, password FROM Admin WHERE email = '" + email + "'";
-        Statement stmt = connection.createStatement();
-
-        try (ResultSet rs = stmt.executeQuery(sql)) {
-            if (rs.next()) {
-                admin = new Admin();
-                admin.setEmail(rs.getString("email"));
-                admin.setPassword(rs.getString("password"));
-            }
-        }
         closeConnection();
-        return admin;
-    }
-
-    public  String getAdminPassword(String email) {
-        try {
-            String sql = "SELECT password FROM Admin WHERE email = '" + email + "'";
-            openConnection();
-            Statement stmt = connection.createStatement();
-            stmt.execute(sql);
-            ResultSet rs = stmt.getResultSet();
-            if (rs.next()) {
-                String password = rs.getString("password");
-                stmt.close();
-                closeConnection();
-                return password;
-            }
-            return "";
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        closeConnection();
-        return "";
     }
 
     public  String getUserPassword(String email) {
@@ -174,6 +98,103 @@ public class DBSQL {
         return "";
     }
 
+    public  String getAdminPassword(String email) {
+        try {
+            String sql = "SELECT password FROM Admin WHERE email = '" + email + "'";
+            openConnection();
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            ResultSet rs = stmt.getResultSet();
+            if (rs.next()) {
+                String password = rs.getString("password");
+                stmt.close();
+                closeConnection();
+                return password;
+            }
+            return "";
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        closeConnection();
+        return "";
+    }
+
+    public String addUser(String email, String password) {
+        try {
+            String sql = "INSERT INTO User (email, password) " +
+                        "VALUE ('" + email + "','" + password + "')";
+            openConnection();
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            ResultSet rs = stmt.getResultSet();
+            System.out.println("Add user");
+            System.out.println(email);
+            System.out.println(password);
+            stmt.close();
+            closeConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return "";
+    }
+
+    public String checkUser(String email) {
+        try {
+            String sql = "SELECT * FROM User WHERE email = '" + email + "'";
+            openConnection();
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            ResultSet rs = stmt.getResultSet();
+            if (rs.next()) {
+                System.out.println("checkuser - Taken");
+                System.out.println(email);
+                return "Taken";
+            } else {
+                System.out.println("checkuser - Clear");
+                System.out.println(email);
+                return "Clear";
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static List<Entry> listAccessByPeriod() {
+        List<Entry> entries = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Entry";
+            openConnection();
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()) {
+                Entry entry = new Entry();
+                entry.setfName(rs.getString("fName"));
+                entry.setlName(rs.getString("lName"));
+                entry.setFirm(rs.getString("firm"));
+                entry.setIdType(rs.getString("idType"));
+                entry.setLocalTime(rs.getString("time"));
+                entries.add(entry);
+            }
+            stmt.close();
+            closeConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return entries;
+    }
+
+    public static void deleteBasedOnAge() {
+        try {
+            String sql = "DELETE FROM Entry WHERE datetime(time) < datetime('now', '-3 years')";
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            stmt.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public static void firmInsert(String firm) {
         try {
             String sql = "INSERT INTO Firm (firmName) " +
@@ -186,28 +207,8 @@ public class DBSQL {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        // closeConnection();
+        closeConnection();
     }
-
-
-    /*public String getAdminEmail(String email) {
-        String hov;
-        try {
-            String sql = "SELECT email FROM Admin WHERE email = '" + email + "'";
-            Statement stmt = connection.createStatement();
-
-            stmt.execute(sql);
-            ResultSet rs = stmt.getResultSet();
-            hov = rs.getString(1);
-            System.out.println(hov);
-            stmt.close();
-            return hov;
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
-    }*/
 
     /*public static String checkEmail(User user) {
         try {
@@ -231,9 +232,9 @@ public class DBSQL {
         }
         closeConnection();
         return "";
-    }*/
+    }
 
-    /*public static void insertUser(User user) {
+    public static void insertUser(User user) {
         try {
             String sql = "INSERT INTO User (email, password) VALUES ('" + user.getEmail() + "','" + user.getPassword() + "')";
             Statement stmt = connection.createStatement();
@@ -244,45 +245,5 @@ public class DBSQL {
         }
     }*/
 
-    /*public static List<String> dropdownFirms() {
-        List<String> firmList = new ArrayList<>();
-        try {
-            String sql = "SELECT firmName FROM Firm";
-            openConnection();
-            Statement stmt = connection.createStatement();
-            stmt.execute(sql);
-            ResultSet rs = stmt.getResultSet();
-            while (rs.next()) {
-                String firmName = rs.getString("firmName");
-                System.out.println("Found firm name: " + firmName);  // Print each firm name
-                firmList.add(firmName);
-            }
-            stmt.close();
-            closeConnection();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        System.out.println("Final firm list: " + firmList);  // Print the final firm list
-        return firmList;
-    }*/
 
-
-    public static List<String> dropdownFirms() {
-        List<String> firmList = new ArrayList<>();
-        try {
-            String sql = "SELECT firmName FROM Firm";
-            openConnection();
-            Statement stmt = connection.createStatement();
-            stmt.execute(sql);
-            ResultSet rs = stmt.getResultSet();
-            while (rs.next()) {
-                firmList.add(rs.getString("firmName"));
-            }
-            stmt.close();
-            closeConnection();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return firmList;
-    }
 }

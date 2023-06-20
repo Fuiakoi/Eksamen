@@ -43,28 +43,29 @@
         <!-- Tabs -->
 
         <div id="Menu" class="w3-container w3-white w3-padding-16 myLink">
-            <h3>Indtast venligst oplysningerne på den nye bruger</h3>
-            <div class="w3-row-padding" style="margin:0 -16px;">
-                <div class="w3-half">
-                    <form method="post" action="usermade" autocomplete="off">
+            <form method="post" action="usermade" autocomplete="off">
+                <h3>Indtast venligst oplysningerne på den nye bruger</h3>
+                <div class="w3-row-padding" style="margin:0 -16px;">
+                    <div class="w3-half">
                         <label for="email">Ny email</label>
                         <input class="w3-input w3-border" type="text" id="email" name="email" placeholder="Indtast ny email" required>
+                    </div>
+                    <div class="w3-half">
+                        <label for="password">Ny adgangskode</label>
+                        <input class="w3-input w3-border" type="password" id="password" name="password" placeholder="Indtast ny adgangskode" required>
+                    </div>
+                    <button class="w3-button w3-indigo w3-margin-top" type="submit">Opret bruger</button>
                 </div>
-                <div class="w3-half">
-                    <label for="password">Ny adgangskode</label>
-                    <input class="w3-input w3-border" type="password" id="password" name="password" placeholder="Indtast ny adgangskode" required>
-                </div>
-            </div>
-            <button class="w3-button w3-indigo w3-margin-top" type="submit">Opret bruger</button>
+            </form>
         </div>
-        </form>
+    </div>
 
-        <form method="get" action="index">
-            <div id="Log ud" class="w3-container w3-white w3-padding-16 myLink">
-                <h3>Sikker på at du gerne vil logge ud?</h3>
-                <button class="w3-button w3-border w3-white" formaction="index">Log ud</button>
-            </div>
-        </form>
+    <form method="get" action="index">
+        <div id="Log ud" class="w3-container w3-white w3-padding-16 myLink">
+            <h3>Sikker på at du gerne vil logge ud?</h3>
+            <button class="w3-button w3-border w3-white" formaction="index">Log ud</button>
+        </div>
+    </form>
     </div>
 </header>
 
