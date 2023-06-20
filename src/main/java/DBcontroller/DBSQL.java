@@ -10,8 +10,8 @@ public class DBSQL {
     private static Connection connection;
     private Statement stmt;
     private Statement stmt1;
-    public static String realUrl = /*"jdbc:sqlite:C://Users/aikke/Desktop/Eksamen/udviddet.db";*/
-            "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/udviddet.db";
+    public static String realUrl = "jdbc:sqlite:C://Users/aikke/Desktop/Eksamen/udviddet.db";
+    /* "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/udviddet.db";*/
     public DBSQL(){
         String url = realUrl;
 
@@ -119,23 +119,18 @@ public class DBSQL {
         return "";
     }
 
-    public String addUser(String email, String password) {
+    public void addUser(String email, String password) {
         try {
             String sql = "INSERT INTO User (email, password) " +
-                        "VALUE ('" + email + "','" + password + "')";
+                    "VALUES ('" + email + "','" + password + "')";
             openConnection();
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
-            ResultSet rs = stmt.getResultSet();
-            System.out.println("Add user");
-            System.out.println(email);
-            System.out.println(password);
             stmt.close();
             closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return "";
     }
 
     public String checkUser(String email) {

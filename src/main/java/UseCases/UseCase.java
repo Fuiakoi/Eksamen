@@ -53,11 +53,9 @@ public class UseCase {
         if (res.equals("Clear")) {
             db.addUser(email, password);
             System.out.println("User made");
-            System.out.println(email);
             return "User made";
         } else {
             System.out.println("Email already taken");
-            System.out.println(email);
             return "Email already taken";
         }
     }
