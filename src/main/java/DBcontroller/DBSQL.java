@@ -119,10 +119,10 @@ public class DBSQL {
         return "";
     }
 
-    public String addUser(String email, String password) {
+    public void addUser(String email, String password) {
         try {
             String sql = "INSERT INTO User (email, password) " +
-                        "VALUE ('" + email + "','" + password + "')";
+                    "VALUES ('" + email + "','" + password + "')";
             openConnection();
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
@@ -131,7 +131,6 @@ public class DBSQL {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return "";
     }
 
     public String checkUser(String email) {
