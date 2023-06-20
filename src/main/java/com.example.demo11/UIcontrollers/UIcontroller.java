@@ -93,11 +93,15 @@ public class UIcontroller {
 
     @GetMapping("/deleteuser")
     public String deleteUser() {
+
         return "deleteuser";
     }
 
     @GetMapping("/userdeleted")
-    public String userDeleted() {
+    public String userDeleted(@RequestParam String email, Model model) throws SQLException {
+        System.out.println("ui ready");
+        UseCase user = new UseCase();
+        UseCase.deleteUser(email);
         return "userdeleted";
     }
 
