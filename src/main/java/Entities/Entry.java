@@ -8,17 +8,18 @@ public class Entry {
     String lName;
     String firm;
     String idType;
-    String pictureID;
     String location;
-    LocalDateTime time;
-    String localTime;
+    LocalDateTime time; // Læg tid og dato ind i databasen
+    String localTime; // Tag tid og dato ud af databasen
 
-    public Entry(String fName, String lName, String firm, String idType/*, String pictureID*/) {
+    public Entry() {
+    }
+
+    public Entry(String fName, String lName, String firm, String idType) {
         this.fName = fName;
         this.lName = lName;
         this.firm = firm;
         this.idType = idType;
-        this.pictureID = pictureID;
     }
 
     public Entry(String fName, String lName, String firm, String idType, String localTime) {
@@ -27,27 +28,6 @@ public class Entry {
         this.firm = firm;
         this.idType = idType;
         this.localTime = localTime;
-    }
-
-    public String getLocalTime() {
-        return localTime;
-    }
-
-    public void setLocalTime(String localTime) {
-        this.localTime = localTime;
-    }
-
-    public Entry() {
-    }
-
-    public LocalDateTime getDateTime() {
-        time = LocalDateTime.now();
-        return time;
-    }
-
-    public void setDateTime(LocalDateTime time) {
-
-        this.time = time;
     }
 
     public String getfName() {
@@ -66,14 +46,6 @@ public class Entry {
         this.lName = lName;
     }
 
-    public String getIdType() {
-        return idType;
-    }
-
-    public void setIdType(String idType) {
-        this.idType = idType;
-    }
-
     public String getFirm() {
         return firm;
     }
@@ -82,12 +54,30 @@ public class Entry {
         this.firm = firm;
     }
 
-    public String getPictureID() {
-        return pictureID;
+    public String getIdType() {
+        return idType;
     }
 
-    public void setPictureID(String pictureID) {
-        this.pictureID = pictureID;
+    public void setIdType(String idType) {
+        this.idType = idType;
+    }
+
+    public LocalDateTime getDateTime() {
+        time = LocalDateTime.now();
+        return time;
+    }
+
+    public void setDateTime(LocalDateTime time) {
+
+        this.time = time;
+    }
+
+    public String getLocalTime() {
+        return localTime;
+    }
+
+    public void setLocalTime(String localTime) {
+        this.localTime = localTime;
     }
 
     @Override
@@ -95,9 +85,8 @@ public class Entry {
         return "Entry{" +
                 "fName='" + fName + '\'' +
                 ", lName='" + lName + '\'' +
-                ", idType='" + idType + '\'' +
-                ", id='" + pictureID + '\'' +
                 ", firm='" + firm + '\'' +
+                ", idType='" + idType + '\'' +
                 ", time=" + time +
                 '}';
     }

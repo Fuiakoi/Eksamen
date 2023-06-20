@@ -16,28 +16,29 @@ import static DBcontroller.DBSQL.listAccessByPeriod;
 @Controller
 public class UIcontroller {
 
-    /*@GetMapping("/index")
-    public String index() {
-        return "index";}*/
+    @GetMapping({"/", "/index"})
+    public String index(Model model) {
+        List<String> firmNames = UseCase.getFirmNames();
+        model.addAttribute("firmNames", firmNames);
+        return "index";
+    }
 
     @PostMapping("/register")
     public String register(@RequestParam String fname, @RequestParam String lname, @RequestParam String firm,
-                           @RequestParam String idType/*, @RequestParam String pictureID*/, Model model) throws SQLException {
+                           @RequestParam String idType, Model model) throws SQLException {
         UseCase useCase = new UseCase();
-        String res = useCase.buildEntry(fname, lname, firm, idType/*, pictureID*/);
+        String res = useCase.buildEntry(fname, lname, firm, idType);
         return "register";
     }
 
-    @PostMapping("/adminlogin")
-    public String adminLogin(@RequestParam String email, @RequestParam String password, Model model) throws SQLException {
-        UseCase useCase = new UseCase();
-        String res = useCase.adminLoginCheck(email, password);
-        if (res == "") {
-            return "wrongmail";
-        } else if (res == "Correct") {
-            return "admin";
-        } else
-            return "wrongpassword";
+    @GetMapping("/wrongmail")
+    public String wrongEmail() {
+        return "wrongmail";
+    }
+
+    @GetMapping("/wrongpassword")
+    public String wrongPassword() {
+        return "wrongpassword";
     }
 
     @PostMapping("/userlogin")
@@ -52,85 +53,42 @@ public class UIcontroller {
             return "wrongpassword";
     }
 
-    @PostMapping("/newuser")
-    public String newUser(@RequestParam String email, @RequestParam String password, Model model) throws SQLException {
+    @GetMapping("/user")
+    public String user() {
+        return "user";
+    }
+
+    @PostMapping("/adminlogin")
+    public String adminLogin(@RequestParam String email, @RequestParam String password, Model model) throws SQLException {
         UseCase useCase = new UseCase();
-        String res = useCase.userLoginCheck(email, password);
+        String res = useCase.adminLoginCheck(email, password);
         if (res == "") {
             return "wrongmail";
         } else if (res == "Correct") {
-            return "user";
+            return "admin";
         } else
             return "wrongpassword";
     }
 
-    @GetMapping("/newadmin")
-    public String newAdmin() {
-        return "newadmin";
-    }
-
-    @GetMapping("/deleteadmin")
-    public String deleteAdmin() {
-        return "deleteadmin";
-    }
-
-    @GetMapping("/listentry")
-    public String listEntry() {
-        return "listentry";
-    }
-
-    @GetMapping("/entry")
-    public String entry(Model model) {
-        List<Entry> accessByPeriod = listAccessByPeriod();// Call the listAccessByPeriod method to get the data
-        model.addAttribute("accessByPeriod", accessByPeriod); // Add the accessByPeriod list to the model
-        return "entry";
-    }
-
-    @GetMapping("/wrongmail")
-    public String wrongEmail() {
-        return "wrongmail";
-    }
-
-    @GetMapping("/wrongpassword")
-    public String wrongPassword() {
-        return "wrongpassword";
-    }
-
     @GetMapping("/admin")
     public String admin() {
-        /*Admin admin = new Admin();
-        if (admin.getLoggedIn() == true) {
-            return "admin";
-        } else
-            return "wrongpassword";*/
         return "admin";
     }
 
-    @GetMapping("/admindeleted")
-    public String adminDeleted() {
-        return "admindeleted";
-    }
-
-    @PostMapping("/adminmade")
-    public String adminMade() {
-        return "adminmade";
-    }
-
     @GetMapping("/newuser")
-    public String newUser(/*@RequestParam User email, @RequestParam String password, Model model*/) /*throws SQLException*/ {
-        /*UseCase useCase = new UseCase();
-        String res = useCase.buildUser(email, password);
-        if (res.equals("User exists")) {
-            return "userexists";
-        }
-        else
-            return "newuser";*/
+    public String newUser() {
         return "newuser";
     }
 
     @PostMapping("/usermade")
-    public String userMade() {
-        return "usermade";
+    public String newUser(@RequestParam String email, @RequestParam String password, Model model) throws SQLException {
+        UseCase useCase = new UseCase();
+        String res = useCase.buildUser(email, password);
+        if (res == "") {
+            return "userexists";
+        } else {
+            return "usermade";
+        }
     }
 
     @GetMapping("/deleteuser")
@@ -143,26 +101,25 @@ public class UIcontroller {
         return "userdeleted";
     }
 
-    @GetMapping("/user")
-    public String user() {
-        return "user";
+    @GetMapping("/newadmin")
+    public String newAdmin() {
+        return "newadmin";
     }
 
-    @GetMapping({"/", "/index"})
-    public String index(Model model) {
-        List<String> firmNames = UseCase.getFirmNames();
-        model.addAttribute("firmNames", firmNames);
-        return "index";
+    @PostMapping("/adminmade")
+    public String adminMade() {
+        return "adminmade";
     }
 
-  /*  @PostMapping("/insertfirm")
-    public String insertFirm(@RequestParam"", Model model) {
-        *//*UseCase.insertFirm("TestService");*//*
-        UseCase useCase = new UseCase();
-        String res = UseCase.insertFirm("");
-        return "insertfirm";
+    @GetMapping("/deleteadmin")
+    public String deleteAdmin() {
+        return "deleteadmin";
     }
-}*/
+
+    @GetMapping("/admindeleted")
+    public String adminDeleted() {
+        return "admindeleted";
+    }
 
     @GetMapping("/insertfirm")
     public String insertFirm() {
@@ -174,5 +131,17 @@ public class UIcontroller {
         UseCase useCase = new UseCase();
         useCase.insertFirm(firmName);
         return "firminserted";
+    }
+
+    @GetMapping("/entry")
+    public String entry(Model model) {
+        List<Entry> accessByPeriod = listAccessByPeriod();
+        model.addAttribute("accessByPeriod", accessByPeriod);
+        return "entry";
+    }
+
+    @GetMapping("/listentry")
+    public String listEntry() {
+        return "listentry";
     }
 }

@@ -25,10 +25,6 @@ public class User {
     public User(String email, String password) {
     }
 
-    /*public User getEmail() {
-        return email;
-    }*/
-
     public void setEmail(String email) {
         this.email = email;
     }
