@@ -84,11 +84,16 @@ public class UIcontroller {
     public String newUser(@RequestParam String email, @RequestParam String password, Model model) throws SQLException {
         UseCase useCase = new UseCase();
         String res = useCase.buildUser(email, password);
-        if (res == "") {
-            return "userexists";
-        } else {
+        if (res == "User made") {
             return "usermade";
+        } else {
+            return "userexists";
         }
+    }
+
+    @GetMapping("/usermade")
+    public String userMade() {
+        return "usermade";
     }
 
     @GetMapping("/deleteuser")
@@ -111,8 +116,19 @@ public class UIcontroller {
     }
 
     @PostMapping("/adminmade")
-    public String adminMade() {
-        return "adminmade";
+    public String adminMade(@RequestParam String email, @RequestParam String password, Model model) throws SQLException {
+        UseCase useCase = new UseCase();
+        String res = useCase.buildAdmin(email, password);
+        if (res == "Admin made") {
+            return "adminmade";
+        } else {
+            return "adminexists";
+        }
+    }
+
+    @GetMapping("/adminexists")
+    public String adminExists() {
+        return "adminexists";
     }
 
     @GetMapping("/deleteadmin")
