@@ -61,6 +61,18 @@ public class UseCase {
         }
     }
 
+    public String buildAdmin(String email, String password) {
+        String res = db.checkAdmin(email);
+        if (res.equals("Clear")) {
+            db.addAdmin(email, password);
+            System.out.println("Admin made");
+            return "Admin made";
+        } else {
+            System.out.println("Email already taken");
+            return "Email already taken";
+        }
+    }
+
     public static String insertFirm(String firmName){
         firmInsert(firmName);
         return firmName;

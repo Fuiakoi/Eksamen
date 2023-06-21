@@ -10,8 +10,8 @@ public class DBSQL {
     private static Connection connection;
     private Statement stmt;
     private Statement stmt1;
-    public static String realUrl = "jdbc:sqlite:C://Users/aikke/Desktop/Eksamen/udviddet.db";
-    /* "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/udviddet.db";*/
+    public static String realUrl = /*"jdbc:sqlite:C://Users/aikke/Desktop/Eksamen/udviddet.db";*/
+     "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/udviddet.db";
     public DBSQL(){
         String url = realUrl;
 
@@ -119,6 +119,31 @@ public class DBSQL {
         return "";
     }
 
+    public String checkUser(String email) {
+        try {
+            String sql = "SELECT * FROM User WHERE email = '" + email + "'";
+            openConnection();
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            ResultSet rs = stmt.getResultSet();
+            if (rs.next()) {
+                System.out.println("checkuser - Taken");
+                System.out.println(email);
+                stmt.close();
+                closeConnection();
+                return "Taken";
+            } else {
+                System.out.println("checkuser - Clear");
+                System.out.println(email);
+                stmt.close();
+                closeConnection();
+                return "Clear";
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void addUser(String email, String password) {
         try {
             String sql = "INSERT INTO User (email, password) " +
@@ -133,24 +158,42 @@ public class DBSQL {
         }
     }
 
-    public String checkUser(String email) {
+    public String checkAdmin(String email) {
         try {
-            String sql = "SELECT * FROM User WHERE email = '" + email + "'";
+            String sql = "SELECT * FROM Admin WHERE email = '" + email + "'";
             openConnection();
             Statement stmt = connection.createStatement();
             stmt.execute(sql);
             ResultSet rs = stmt.getResultSet();
             if (rs.next()) {
-                System.out.println("checkuser - Taken");
+                System.out.println("checkadmin - Taken");
                 System.out.println(email);
+                stmt.close();
+                closeConnection();
                 return "Taken";
             } else {
-                System.out.println("checkuser - Clear");
+                System.out.println("checkadmin - Clear");
                 System.out.println(email);
+                stmt.close();
+                closeConnection();
                 return "Clear";
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void addAdmin(String email, String password) {
+        try {
+            String sql = "INSERT INTO Admin (email, password) " +
+                    "VALUES ('" + email + "','" + password + "')";
+            openConnection();
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            stmt.close();
+            closeConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 
