@@ -86,4 +86,10 @@ public class UseCase {
         System.out.println("usecase call 1");
         return "user deleted";
     }
+
+    public static List<Entry> buildList() {
+        List <Entry> entrylist;
+        entrylist = DBSQL.listAccessByPeriod();
+        return entrylist;
+    }
 }

@@ -155,7 +155,7 @@ public class UIcontroller {
 
     @GetMapping("/entry")
     public String entry(Model model) {
-        List<Entry> accessByPeriod = listAccessByPeriod();
+        List<Entry> accessByPeriod = UseCase.buildList();
         model.addAttribute("accessByPeriod", accessByPeriod);
         return "entry";
     }
