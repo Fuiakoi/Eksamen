@@ -10,8 +10,8 @@ public class DBSQL {
     private static Connection connection;
     private Statement stmt;
     private Statement stmt1;
-    public static String realUrl = /*"jdbc:sqlite:C://Users/aikke/Desktop/Eksamen/udviddet.db";*/
-     "jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/udviddet.db";
+    public static String realUrl = "jdbc:sqlite:C://Users/aikke/Desktop/Eksamen/udviddet.db";
+     /*"jdbc:sqlite:C://Users/mostg/OneDrive/Skrivebord/Eksamen/udviddet.db";*/
     public DBSQL(){
         String url = realUrl;
 
@@ -64,7 +64,9 @@ public class DBSQL {
     public static void entryDKinsert(Entry entry) {
         try {
             String sql = "INSERT INTO entry (fName, lName, firm, idType, time) " +
-                    "VALUES ('" + entry.getfName() + "','" + entry.getlName() + "','" + entry.getFirm() + "','" + entry.getIdType() + "','" + entry.getDateTime()
+                    "VALUES ('" + entry.getfName() + "','"
+                    + entry.getlName() + "','" + entry.getFirm()
+                    + "','" + entry.getIdType() + "','" + entry.getDateTime()
                     + "')";
             openConnection();
             Statement stmt = connection.createStatement();

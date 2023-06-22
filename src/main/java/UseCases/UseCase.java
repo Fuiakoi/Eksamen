@@ -5,6 +5,7 @@ import Entities.Entry;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static DBcontroller.DBSQL.firmInsert;
@@ -85,5 +86,11 @@ public class UseCase {
         userDelete(email);
         System.out.println("usecase call 1");
         return "user deleted";
+    }
+
+    public static List<Entry> buildList() {
+        List <Entry> entrylist;
+        entrylist = DBSQL.listAccessByPeriod();
+        return entrylist;
     }
 }
